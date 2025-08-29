@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stötta Svenska Rullstolsinnebandylandslaget</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+        :root {
+            --primary-blue: #004B87;
+            --primary-yellow: #FFCD00;
+            --light-gray: #f4f4f4;
+            --dark-gray: #333;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 2rem;
+        }
+
+        /* Header & Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 75, 135, 0.8), rgba(0, 75, 135, 0.8)), url('data:image/jpeg;base64,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_uJJLuVf3so2Cg/ghBPyjv1Y7nsF8PAzwet+Ew+I4WW9kXEs+NwDvpGD8qDsT8x3PQAbegCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigCiiigIri1n84tZ7YnaaGWIn3SKV/nXxpwJvBv7Jz0S6gY/BZVJ/lX23Xxj4n2fg8TvlAx/pE4HpiRiB+WKAsv4Ydvnh9rJ2S7APweN/wD5xWjrK/C1tA/A2kI3hureQHsCTGMn4CRj61q6AKKKKAKKKKAKKzr8ftkuGs2u4hOrhDFnlYsWClQWwCSWAAzkkjG9V348+N6cJiNvbsr3kincEEQg9JGHY/2V333I5SA1Piv4tWfCYW52Et2y/u4FILAnbLyD5UHoTlvQDJA+XeLcTnvriS6uZGklkOWZup7ADsAAAANgAAPKs+PqTufnXqigb1I7AbknsBQHrFGzsERWZmICqoLMxOwAA3JJ2AFfQ/gF4ENGRxLiMeZSP8AS4HGyr2mYH8Z/s9l3+Y4DPgJ4DGPycR4lHmUjNvbSDZT2mYH8Z/s9lyd2wH0RQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBRRRQBXxj48W3hcavxjHNJDL/wA0SLJ/Gxr7Or5H+EvZeFxC3uAPluICpPcyMcj6LJ+lAWD4+2vnHAsQA/LBbzjHYIYyf/bb8621eXgze/OODcPkzkm1iQn1MY8Jv4qa1FAFFFFAfOHjz4J3U99PfcNVZVuXMksRZUdXb5mUsQpDEls5yCSMYqb4N8Hyykikv7tEVgC0cClyoIzguxABHYgN76veigKn+Dz4ccS4bLfS3yhFuHjWIB1c/utwzZU4G7tjBOwFSuOfB34ZctJLazXNs7ksyLIsiZJySolBwPYkDuAKuqigKCHwfd/wD1q5/8BP8Auq4fDfw8tOGwfZ8ALNjeV+aR8bZduuOwGB6VuKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAKKKKAP//Z') center center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 8rem 0;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-blue);
+            opacity: 0.7;
+        }
+
+        .hero * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--white);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--primary-yellow);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+        
+        .logo svg {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            fill: var(--primary-yellow);
+            stroke: var(--primary-blue);
+            stroke-width: 5;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            padding: 0 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-yellow);
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .section-light {
+            background: var(--white);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 4px;
+            background: var(--primary-yellow);
+            bottom: -10px;
+            left: 10%;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 1.5rem auto;
+        }
+
+        /* Sponsor Section */
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .sponsor-card {
+            background: var(--white);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .sponsor-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+        
+        .sponsor-card .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .sponsor-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+
+        .sponsor-card ul li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sponsor-card ul li::before {
+            content: '✔';
+            color: var(--primary-yellow);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .sponsor-card.platinum {
+             border-top: 5px solid var(--primary-blue);
+        }
+        .sponsor-card.gold {
+             border-top: 5px solid var(--primary-yellow);
+        }
+        .sponsor-card.silver {
+             border-top: 5px solid #c0c0c0;
+        }
+        .sponsor-card.bronze {
+             border-top: 5px solid #cd7f32;
+        }
+
+        /* Private Support Section */
+        .support-methods {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .support-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .support-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+        }
+        
+        .swish-details p, .bank-details p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .swish-details span, .bank-details span {
+            font-weight: 700;
+            color: var(--dark-gray);
+        }
+        
+        .swish-number {
+             font-size: 1.5rem !important;
+             font-weight: 700;
+             letter-spacing: 2px;
+             color: #8B008B !important;
+             margin-top: 1rem !important;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            margin: 0 1rem;
+            font-size: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-yellow);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--primary-yellow);
+            color: var(--primary-blue);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #ffd800;
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive */
+        @media(max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            .navbar .container {
+                flex-direction: column;
+            }
+            .nav-links {
+                margin-top: 1rem;
+            }
+            .nav-links li {
+                padding: 0 0.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">BLI EN DEL AV VÅR RESA – TILLSAMMANS MOT GULDET!</h1>
+            <p class="hero-subtitle">Vi är Svenska Rullstolsinnebandylandslaget. Vi är atleter, vi är kämpar och vi bär med stolthet de blågula färgerna. Vår dröm är att representera Sverige, men vi kan inte göra det utan ditt stöd.</p>
+            <a href="#stotta-oss" class="btn">Stötta Oss Nu</a>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                      <path d="M 20,40 L 20,60 L 30,60 L 30,50 L 50,50 L 50,60 L 60,60 L 60,40 L 50,40 L 50,30 L 30,30 L 30,40 Z" />
+                      <path d="M 5,20 L 5,30 L 15,30 L 15,10 L 35,10 L 35,20 Z" />
+                      <path d="M 65,20 L 65,10 L 85,10 L 85,30 L 95,30 L 95,20 Z" />
+                    </g>
+                </svg>
+                <span>Svenska Rullstolsinnebandylandslaget</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#om-oss">Om Oss</a></li>
+                <li><a href="#sponsorer">För Företag</a></li>
+                <li><a href="#stotta-oss">För Privatpersoner</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section id="om-oss" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">En Motståndare Vi Inte Kan Besegra Ensamna</h2>
+            <p>Just nu står vår passion och vår talang inför en tyst läktare. Mästerskapen hägrar, men reskassan är tom. Till skillnad från många andra landslag får vi inga statliga bidrag för att tävla. Varje resa, varje turnering och varje chans att bära landslagströjan är helt beroende av människor och företag som tror på oss. Var med och skriv historia med oss. Ert stöd är inte bara ett bidrag – det är bränslet som tar oss till VM.</p>
+        </div>
+    </section>
+
+    <section id="sponsorer" class="section">
+        <div class="container">
+            <h2 class="section-title">FÖR FÖRETAG – EN INVESTERING I STOLTHET</h2>
+            <p>Att sponsra Svenska Rullstolsinnebandylandslaget är mer än en logotyp. Det är ett partnerskap som visar att ert företag står för inkludering, mångfald och en orubblig tro på att inga hinder är för stora. Låt oss tillsammans skapa en vinnande historia!</p>
+            
+            <div class="sponsors-grid">
+                <div class="sponsor-card platinum">
+                    <h3>PLATINA</h3>
+                    <p class="price">50 000 KR</p>
+                    <ul>
+                        <li>Logotyp på bröstet på matchtröjan</li>
+                        <li>Presenteras som Huvudsponsor digitalt</li>
+                        <li>Minst 5 dedikerade inlägg på sociala medier</li>
+                        <li>Exklusivt event med laget</li>
+                        <li>Signerad matchtröja</li>
+                    </ul>
+                </div>
+                <div class="sponsor-card gold">
+                    <h3>GULD</h3>
+                    <p class="price">30 000 KR</p>
+                    <ul>
+                        <li>Logotyp på matchtröjans ärm</li>
+                        <li>Presenteras som Guldsponsor digitalt</li>
+                        <li>Minst 3 dedikerade inlägg på sociala medier</li>
+                        <li>Signerad matchtröja</li>
+                    </ul>
+                </div>
+                <div class="sponsor-card silver">
+                    <h3>SILVER</h3>
+                    <p class="price">10 000 KR</p>
+                    <ul>
+                        <li>Logotyp på uppvärmningströjor</li>
+                        <li>Listas som Silversponsor på hemsidan</li>
+                        <li>Gemensamt tack-inlägg i sociala medier</li>
+                    </ul>
+                </div>
+                <div class="sponsor-card bronze">
+                    <h3>BRONS</h3>
+                    <p class="price">5 000 KR</p>
+                    <ul>
+                        <li>Logotyp på vår hemsida</li>
+                        <li>Inkluderas i gemensamt tack-inlägg</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="stotta-oss" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">FÖR DIG – BLI VÅR SJÄTTE SPELARE!</h2>
+            <p>Varje krona räknas, varje hejarop stärker oss. Ditt bidrag, oavsett storlek, är en direktbiljett för en spelare att kunna följa med på resan och jaga sina drömmar. Du blir en del av laget och en avgörande kraft i vår jakt på medaljer. Tack!</p>
+
+            <div class="support-methods">
+                <div class="support-card">
+                    <h3>SWISHA DITT STÖD</h3>
+                    <p>Öppna din Swish-app och skicka ditt bidrag. Enkelt, snabbt och ovärderligt för oss.</p>
+                    <div class="swish-details">
+                        <p>Nummer: <span class="swish-number">123 90 90 90 9</span></p>
+                        <p>Mottagare: <span>Svenska Rullstolsinnebandy</span></p>
+                        <p>Meddelande: <span>Go Sweden! 🇸🇪</span></p>
+                    </div>
+                </div>
+                <div class="support-card">
+                    <h3>BANKÖVERFÖRING</h3>
+                     <p>För dig som föredrar en klassisk banköverföring.</p>
+                     <div class="bank-details">
+                        <p>Bankgiro: <span>555-1234</span></p>
+                        <p>Mottagare: <span>Stiftelsen Svensk Rullstolsinnebandy</span></p>
+                        <p>Meddelande/OCR: <span>Ditt Namn + Gåva</span></p>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <h3>FÖLJ VÅR RESA MOT GULDET!</h3>
+            <div class="social-links">
+                <a href="#" target="_blank" title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                      <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8s.01 2.444.048 3.297c.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.444-.048-3.298c-.04-.851-.174-1.433-.372-1.942a3.916 3.916 0 0 0-.923-1.417A3.916 3.916 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 8 0zm0 1.44c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.282.24.705.275 1.486.039.843.047 1.096.047 3.232s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.232s.008-2.389.046-3.232c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.843-.038 1.096-.047 3.232-.047zM8 4.868a3.132 3.132 0 1 0 0 6.264 3.132 3.132 0 0 0 0-6.264zm0 5.164a2.032 2.032 0 1 1 0-4.064 2.032 2.032 0 0 1 0 4.064zm4.002-6.17a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92z"/>
+                    </svg>
+                </a>
+                <a href="#" target="_blank" title="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                      <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">&copy; 2025 Svenska Rullstolsinnebandylandslaget. Tillsammans är vi ostoppbara!</p>
+        </div>
+    </footer>
+
+</body>
+</html>
