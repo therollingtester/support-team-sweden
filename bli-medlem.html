@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bli Medlem & Stötta Landslaget – GDPR Information</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #FFCD00;
+            box-shadow: 0 0 0 3px rgba(255, 205, 0, 0.3);
+        }
+        .submit-button {
+            transition: all 0.3s ease;
+        }
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 56, 107, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <div class="bg-[#00386B] text-white p-8 text-center">
+                <h1 class="text-3xl sm:text-4xl font-black text-[#FFCD00]">BLI MEDLEM & STÖTTA LANDSLAGET!</h1>
+                <p class="mt-2 text-slate-200">Bli en officiell supporter och hjälp oss på resan mot VM-guldet.</p>
+            </div>
+
+            <div class="p-8">
+                <div class="bg-slate-100 border-l-4 border-[#FFCD00] p-6 rounded-lg mb-8">
+                    <h2 class="text-xl font-bold text-[#00386B] mb-2">Bli medlem för endast 500 kr per år!</h2>
+                    <p class="text-slate-700 mb-4">Som tack för ditt stöd får du en exklusiv, signerad landslagströja – direkt från våra spelare.</p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-600">
+                        <li>Ge våra spelare <strong>lägre egenavgifter</strong>.</li>
+                        <li>Skapa bättre förutsättningar att <strong>prestera på internationell nivå</strong>.</li>
+                        <li><strong>Sprid sporten</strong> och gör den mer tillgänglig för fler.</li>
+                        <li>Bygg <strong>stolthet och gemenskap</strong> kring landslaget.</li>
+                    </ul>
+                </div>
+
+                <!-- Formulär för medlemskap -->
+                <!-- OBS: Detta formulär skickar ingen data. Det måste kopplas till en backend-tjänst för att fungera. -->
+                <form action="#" method="POST" class="space-y-6">
+                    <div>
+                        <label for="full_name" class="block text-sm font-bold text-slate-700">Fullständigt namn</label>
+                        <input type="text" name="full_name" id="full_name" required class="form-input mt-1 block w-full px-4 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-bold text-slate-700">E-postadress</label>
+                        <input type="email" name="email" id="email" required class="form-input mt-1 block w-full px-4 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50">
+                    </div>
+
+                    <div>
+                        <label for="address" class="block text-sm font-bold text-slate-700">Leveransadress (för tröjan)</label>
+                        <textarea name="address" id="address" rows="3" required placeholder="Gatuadress, Postnummer, Ort" class="form-input mt-1 block w-full px-4 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50"></textarea>
+                    </div>
+
+                    <!-- GDPR Information och Samtycke -->
+                    <div class="bg-red-50 border border-red-200 p-4 rounded-lg">
+                        <h3 class="text-lg font-bold text-red-800 mb-2">Hantering av personuppgifter (GDPR)</h3>
+                        <p class="text-sm text-red-700 mb-4">
+                            Genom att skicka in detta formulär godkänner du att vi lagrar dina personuppgifter. Vi behöver dessa för att kunna hantera ditt medlemskap och skicka din landslagströja.
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-red-700">
+                            <li><strong>Vilka uppgifter lagras?</strong> Ditt namn, din e-postadress och din postadress.</li>
+                            <li><strong>Varför?</strong> För att kunna föra vårt medlemsregister och för att veta vart vi ska skicka din tröja.</li>
+                            <li><strong>Hur länge?</strong> Uppgifterna sparas så länge du är medlem.</li>
+                            <li><strong>Dina rättigheter:</strong> Du har rätt att när som helst begära ut, ändra eller radera dina uppgifter genom att kontakta oss.</li>
+                        </ul>
+                        <div class="mt-4 relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input id="gdpr_consent" name="gdpr_consent" type="checkbox" required class="h-4 w-4 text-[#00386B] border-slate-300 rounded focus:ring-[#FFCD00]">
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="gdpr_consent" class="font-medium text-slate-800">Jag har läst och godkänner hanteringen av mina personuppgifter enligt ovan.</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="submit-button w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-lg text-lg font-bold text-[#00386B] bg-[#FFCD00] hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+                            Bli medlem nu (500 kr)
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <footer class="text-center mt-8 text-slate-500 text-sm">
+            <p>&copy; 2025 Svenska Rullstolsinnebandylandslaget. Tillsammans är vi ostoppbara!</p>
+        </footer>
+    </div>
+
+</body>
+</html>
