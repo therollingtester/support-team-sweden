@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bjud Landslaget på en Kaffe! – Stötta Rullstolsinnebandy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Grundläggande sidinställningar */
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #1a1a1a; /* Mörk bakgrund för att rama in innehållet */
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
+
+        /* Huvudbehållare i porträttformat */
+        .portrait-container {
+            width: 100%;
+            max-width: 480px; /* Bredd som simulerar en mobilskärm */
+            aspect-ratio: 4 / 5; /* Tvingar fram ett stående porträttformat (4:5) */
+            
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10%;
+            box-sizing: border-box;
+            text-align: center;
+            border-radius: 16px; /* Mjukt rundade hörn */
+            overflow: hidden; /* Döljer det som är utanför rundningen */
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* === PLATSHÅLLARE FÖR BAKGRUNDSBILD === */
+        .hero-bg {
+            background-size: cover;
+            background-position: center;
+            /* Byt ut URL:en nedan mot sökvägen till din egen bild, t.ex. 'images/actionbild.jpg' */
+            background-image: 
+                /* Mörkblå toning för att texten ska synas bättre */
+                linear-gradient(rgba(0, 56, 107, 0.8), rgba(0, 56, 107, 0.8)), 
+                /* Er bakgrundsbild här */
+                url('https://placehold.co/800x1000/cccccc/333333?text=Eran+Bild+H%C3%A4r');
+        }
+
+        /* Rubrik */
+        h1 {
+            font-size: 2.2em; /* Något mindre för att ge plats åt loggan */
+            line-height: 1.1;
+            margin: 0 0 0.5em 0; /* Justerad marginal */
+            color: #FFCD00; /* Gul färg från er branding */
+            font-weight: 900;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+        }
+
+        /* === CSS KAFFEKOPP LOGOTYP === */
+        .coffee-cup-container {
+            margin-bottom: 1.5em; /* Utrymme mellan logotyp och rubrik */
+        }
+
+        .coffee-cup {
+            position: relative;
+            width: 80px;
+            height: 75px;
+            background: linear-gradient(to right, #f9f9f9, #d9d9d9);
+            border-bottom-left-radius: 45%;
+            border-bottom-right-radius: 45%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .cup-handle {
+            position: absolute;
+            right: -30px;
+            top: 10px;
+            width: 35px;
+            height: 45px;
+            border: 8px solid #d9d9d9;
+            border-left-color: transparent; /* Skapar C-formen */
+            border-radius: 50%;
+            transform: rotate(15deg);
+        }
+
+        .coffee-cup::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            height: 8px;
+            background: linear-gradient(to right, #FFCD00, #e6b800); /* Gul "vätska", matchar branding */
+            border-radius: 50%;
+        }
+
+        .steam {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .steam span {
+            display: block;
+            width: 2px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            animation: steam-rise 3s infinite;
+        }
+
+        .steam span:nth-child(2) {
+            animation-delay: 0.5s;
+            height: 40px;
+        }
+
+        .steam span:nth-child(3) {
+            animation-delay: 1s;
+            height: 25px;
+        }
+
+        @keyframes steam-rise {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-40px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Ruta för Swish-information */
+        .swish-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #00386B; /* Blå färg från er branding */
+            padding: 15px 25px;
+            border-radius: 12px;
+            margin-bottom: 1.5em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .swish-title {
+            font-size: 0.8em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .swish-number {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.8em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #663399; /* Klassisk Swish-lila färg */
+        }
+        
+        /* Brödtext */
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            font-weight: 400;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+            max-width: 90%;
+        }
+
+        /* Klass för att markera text, t.ex. "50 kr" */
+        .highlight {
+            font-weight: 900;
+            color: #FFCD00;
+        }
+
+        /* Anpassning för mindre skärmar (t.ex. mobiler) */
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+            .portrait-container {
+                max-width: 100%;
+                border-radius: 0;
+                min-height: 100vh; /* Fyll hela skärmen på små enheter */
+            }
+            h1 { font-size: 2em; }
+            .swish-number { font-size: 1.5em; }
+            p { font-size: 1em; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Behållaren som har bakgrundsbild och allt innehåll -->
+    <div class="portrait-container hero-bg">
+        
+        <!-- NY KAFFELOGOTYP -->
+        <div class="coffee-cup-container">
+            <div class="coffee-cup">
+                <div class="steam">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="cup-handle"></div>
+            </div>
+        </div>
+        
+        <!-- &shy; är en "soft hyphen" som föreslår var ord kan delas av snyggt -->
+        <h1>Bjud Rullstols&shy;innebandy&shy;landslaget på en Kaffe</h1>
+
+        <div class="swish-box">
+            <div class="swish-title">Swisha till</div>
+            <!-- === BYT UT SWISH-NUMRET NEDAN === -->
+            <div class="swish-number">123 456 78 90</div>
+        </div>
+
+        <p>
+            <span class="highlight">50 kr</span> per privatperson är allt vi frågar efter. Varje krona räknas och hjälper oss att ta oss till Världsmästerskapen!
+        </p>
+
+    </div>
+
+</body>
+</html>
+
