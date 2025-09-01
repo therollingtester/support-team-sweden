@@ -1,833 +1,321 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="sv" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stötta Svenska Rullstolsinnebandylandslaget – Tillsammans mot Guldet!</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap');
-
-        :root {
-            --primary-blue: #004B87;
-            --primary-yellow: #FFCD00;
-            --light-gray: #f4f4f4;
-            --dark-gray: #333;
-            --white: #ffffff;
-            --swish-purple: #8B008B; /* Dark Magenta, commonly associated with Swish */
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--light-gray);
-            color: var(--dark-gray);
-            line-height: 1.6;
-            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
         }
-
-        .container {
-            max-width: 1200px; /* Något bredare för bättre bildvisning */
-            margin: auto;
-            overflow: hidden;
-            padding: 0 2rem;
+        /* BILD-PLATSHÅLLARE: Byt ut 'images/header-bakgrund.jpg' mot sökvägen till din header-bild. */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 56, 107, 0.85), rgba(0, 56, 107, 0.85)), url('images/header-bakgrund.jpg');
         }
-
-        /* Global Fade-in Effect */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in.appear {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Header & Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 75, 135, 0.85), rgba(0, 75, 135, 0.85)), url('pictures/hero-background.jpg') center center/cover no-repeat;
-            color: var(--white);
-            text-align: center;
-            padding: 10rem 0; /* Mer utrymme */
-            position: relative;
-            animation: fadeInBackground 2s ease-out;
-        }
-
-        @keyframes fadeInBackground {
-            from { opacity: 0.8; }
-            to { opacity: 1; }
-        }
-        
-        .hero-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 4rem; /* Större titel */
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
-            letter-spacing: 1px;
-        }
-
-        .hero-subtitle {
-            font-family: 'Roboto', sans-serif; /* Annan font för brödtext */
-            font-size: 1.6rem; /* Större undertitel */
-            max-width: 900px;
-            margin: 0 auto 3rem auto;
-            font-weight: 300;
-            line-height: 1.4;
-        }
-
-        /* Navigation */
-        .navbar {
-            background: var(--white);
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100; /* Högre z-index */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border-bottom: 5px solid var(--primary-yellow); /* Tjockare kantlinje */
-            transition: all 0.3s ease-in-out;
-        }
-
-        .navbar.scrolled {
-            padding: 0.7rem 1rem; /* Kompakt när scrollat */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: 700;
-            color: var(--primary-blue);
-            font-size: 1.3rem; /* Större logotyptext */
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .logo svg {
-            width: 35px; /* Större ikon */
-            height: 35px;
-            margin-right: 12px;
-            fill: var(--primary-yellow);
-            stroke: var(--primary-blue);
-            stroke-width: 4;
-            transition: fill 0.3s ease, stroke 0.3s ease;
-        }
-
-        .logo:hover {
-            color: var(--dark-gray);
-        }
-        .logo:hover svg {
-            fill: var(--primary-blue);
-            stroke: var(--primary-yellow);
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-        }
-
-        .nav-links li {
-            padding: 0 1.2rem; /* Mer avstånd mellan länkar */
-        }
-
-        .nav-links a {
-            font-family: 'Montserrat', sans-serif;
-            text-decoration: none;
-            color: var(--primary-blue);
-            font-weight: 700;
-            transition: color 0.3s ease, transform 0.2s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            background: var(--primary-yellow);
-            left: 0;
-            bottom: -5px;
-            transition: width 0.3s ease-out;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-yellow);
-            transform: translateY(-2px);
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Sections */
-        .section {
-            padding: 6rem 0; /* Mer padding */
-            text-align: center;
-        }
-        
-        .section-light {
-            background: var(--white);
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
-        }
-
-        .section-dark {
-            background: var(--primary-blue);
-            color: var(--white);
-        }
-
-        .section-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3.2rem; /* Större sektionstitel */
-            font-weight: 900;
-            color: var(--primary-blue);
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-dark .section-title {
-            color: var(--primary-yellow);
-        }
-
         .section-title::after {
             content: '';
             position: absolute;
-            width: 60%; /* Kortare linje */
-            height: 5px; /* Tjockare linje */
-            background: var(--primary-yellow);
-            bottom: -15px;
-            left: 20%;
-            border-radius: 3px;
+            width: 80px;
+            height: 4px;
+            background: #FFCD00;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
-        .section-dark .section-title::after {
-            background: var(--white);
+        /* Scroll Animation */
+        .reveal {
+            position: relative;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 1s all ease;
         }
-
-        .section p {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1.2rem; /* Större brödtext */
-            max-width: 900px;
-            margin: 1.5rem auto 2.5rem auto;
-            color: var(--dark-gray);
-        }
-        .section-dark p {
-            color: var(--light-gray);
-        }
-
-        /* Image Carousel (Swiper) */
-        .swiper-container {
-            width: 100%;
-            padding-top: 50px;
-            padding-bottom: 50px;
-        }
-
-        .swiper-slide {
-            background-position: center;
-            background-size: cover;
-            width: 80%; /* Mindre bildstorlek */
-            height: 400px; /* Fast höjd */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px; /* Rundare hörn */
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.5s ease;
-        }
-
-        .swiper-slide-active {
-            transform: scale(1.05); /* Zoomar in den aktiva bilden */
-        }
-
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ser till att bilden fyller ramen */
-        }
-        .swiper-button-next, .swiper-button-prev {
-            color: var(--primary-blue) !important;
-            --swiper-navigation-size: 40px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            transition: background-color 0.3s ease;
-        }
-        .swiper-button-next:hover, .swiper-button-prev:hover {
-            background-color: rgba(255, 205, 0, 0.9);
-            color: var(--white) !important;
-        }
-
-        /* Sponsor Section */
-        .sponsors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Något större kort */
-            gap: 2.5rem; /* Större mellanrum */
-            margin-top: 3rem;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .sponsor-card {
-            background: var(--white);
-            border: 1px solid #ddd;
-            border-radius: 15px; /* Rundare hörn */
-            padding: 2.5rem; /* Mer padding */
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sponsor-card:hover {
-            transform: translateY(-15px); /* Mer lyft vid hover */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-
-        .sponsor-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem; /* Större titel */
-            color: var(--primary-blue);
-            margin-bottom: 0.8rem;
-            font-weight: 900;
-            text-align: center;
-        }
-        
-        .sponsor-card .price {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem; /* Större pris */
-            font-weight: 700;
-            color: var(--dark-gray);
-            margin-bottom: 2rem;
-            text-align: center;
-            flex-grow: 1; /* Pressar ner listan */
-        }
-        
-        .sponsor-card ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            text-align: left;
-        }
-
-        .sponsor-card ul li {
-            font-family: 'Roboto', sans-serif;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: flex-start; /* Justera checkmark med text */
-            font-size: 1.1rem;
-        }
-        
-        .sponsor-card ul li::before {
-            content: '✔';
-            color: var(--primary-yellow);
-            font-weight: bold;
-            margin-right: 12px;
-            font-size: 1.3rem;
-            line-height: 1.2;
-        }
-        
-        .sponsor-card.platinum {
-            border-top: 8px solid var(--primary-blue); /* Tjockare kantlinje */
-            background: linear-gradient(135deg, var(--white) 0%, #e0f2f7 100%); /* Lätt gradient */
-        }
-        .sponsor-card.gold {
-            border-top: 8px solid var(--primary-yellow);
-            background: linear-gradient(135deg, var(--white) 0%, #fffde7 100%);
-        }
-        .sponsor-card.silver {
-            border-top: 8px solid #c0c0c0;
-            background: linear-gradient(135deg, var(--white) 0%, #f0f0f0 100%);
-        }
-        .sponsor-card.bronze {
-            border-top: 8px solid #cd7f32;
-            background: linear-gradient(135deg, var(--white) 0%, #fbe9e7 100%);
-        }
-
-        /* Private Support Section */
-        .support-methods {
-            display: flex;
-            justify-content: center;
-            align-items: stretch; /* Se till att korten är lika höga */
-            gap: 3rem;
-            margin-top: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .support-card {
-            background: var(--white);
-            padding: 3rem; /* Mer padding */
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-            flex: 1;
-            min-width: 320px; /* Bättre minsta bredd */
-            max-width: 450px; /* Bättre maximal bredd */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: left;
-            border-bottom: 5px solid var(--primary-blue);
-        }
-        .support-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-        }
-
-        .support-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem; /* Större titel */
-            color: var(--primary-blue);
-            margin-bottom: 1.8rem;
-            text-align: center;
-        }
-        
-        .support-card p {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: var(--dark-gray);
-            text-align: center;
-        }
-        
-        .swish-details p, .bank-details p {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .swish-details span, .bank-details span {
-            font-family: 'Roboto Mono', monospace; /* Monospace för nummer */
-            font-weight: 700;
-            color: var(--dark-gray);
-        }
-        
-        .swish-number {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 1.7rem !important; /* Extra stort Swish-nummer */
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--swish-purple) !important; /* Lila Swish-färg */
-            margin-top: 1.5rem !important;
-            display: block;
-            text-align: center;
-            padding: 0.5rem 0;
-            background-color: rgba(139, 0, 139, 0.05);
-            border-radius: 5px;
-        }
-        .swish-details p:first-of-type span {
-            flex-grow: 1;
-            text-align: right;
-        }
-        .swish-details p span {
-            margin-left: 10px;
-        }
-        .bank-details p span {
-            margin-left: 10px;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--primary-blue);
-            color: var(--white);
-            text-align: center;
-            padding: 4rem 0;
-            border-top: 5px solid var(--primary-yellow);
-        }
-
-        .footer h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem; /* Större footer-titel */
-            margin-bottom: 1.5rem;
-            color: var(--primary-yellow);
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-        }
-
-        .social-links a {
-            color: var(--white);
-            margin: 0 1.5rem; /* Mer avstånd */
-            font-size: 2.8rem; /* Större ikoner */
-            transition: color 0.3s ease, transform 0.3s ease;
-            display: inline-block;
-        }
-
-        .social-links a:hover {
-            color: var(--primary-yellow);
-            transform: translateY(-5px) scale(1.1);
-        }
-        
-        .copyright {
-            font-family: 'Roboto', sans-serif;
-            margin-top: 2.5rem;
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            background: var(--primary-yellow);
-            color: var(--primary-blue);
-            padding: 1.2rem 3rem; /* Större knapp */
-            border: none;
-            border-radius: 50px;
-            font-size: 1.3rem; /* Större text */
-            font-weight: 700;
-            text-decoration: none;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn:hover {
-            background: #ffd800; /* Lättare gul */
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-        
-        /* General Image Styling */
-        .content-image {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            border-radius: 10px;
-            margin: 2rem auto;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            display: block; /* Centrera bilden */
-        }
-        .content-image.left {
-            float: left;
-            margin-right: 2rem;
-            max-width: 50%;
-        }
-        .content-image.right {
-            float: right;
-            margin-left: 2rem;
-            max-width: 50%;
-        }
-
-
-        /* Responsive */
-        @media(max-width: 992px) {
-            .hero-title {
-                font-size: 3rem;
-            }
-            .hero-subtitle {
-                font-size: 1.4rem;
-            }
-            .navbar .container {
-                flex-direction: column;
-            }
-            .nav-links {
-                margin-top: 1.5rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .nav-links li {
-                padding: 0 0.8rem;
-                margin-bottom: 0.5rem;
-            }
-            .section-title {
-                font-size: 2.5rem;
-            }
-            .support-methods {
-                flex-direction: column;
-                align-items: center;
-            }
-            .support-card {
-                max-width: 90%;
-            }
-            .sponsors-grid {
-                grid-template-columns: 1fr;
-            }
-            .content-image.left, .content-image.right {
-                float: none;
-                margin: 2rem auto;
-                max-width: 100%;
-            }
-        }
-
-        @media(max-width: 576px) {
-            .hero {
-                padding: 6rem 0;
-            }
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            .btn {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-            }
-            .section {
-                padding: 3rem 0;
-            }
-            .section-title {
-                font-size: 2rem;
-                margin-bottom: 1.5rem;
-            }
-            .section p {
-                font-size: 1rem;
-            }
-            .footer h3 {
-                font-size: 2rem;
-            }
-            .social-links a {
-                font-size: 2.2rem;
-                margin: 0 1rem;
-            }
-            .swiper-slide {
-                width: 95%;
-                height: 300px;
-            }
-            .swish-number {
-                font-size: 1.4rem !important;
-            }
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800">
 
-    <header class="hero">
-        <div class="container fade-in">
-            <h1 class="hero-title">BLI EN DEL AV VÅR RESA – TILLSAMMANS MOT GULDET!</h1>
-            <p class="hero-subtitle">Vi är Svenska Rullstolsinnebandylandslaget. Vi är atleter, vi är kämpar och vi bär med stolthet de blågula färgerna. Vår dröm är att representera Sverige, men vi kan inte göra det utan ditt stöd.</p>
-            <a href="#stotta-oss" class="btn">Stötta Oss Nu</a>
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-md transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2 text-lg font-bold text-[#00386B]">
+                <svg class="w-8 h-8 rounded-sm" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="16" height="10" fill="#006aa7"/>
+                    <rect x="5" width="2" height="10" fill="#fecc00"/>
+                    <rect y="4" width="16" height="2" fill="#fecc00"/>
+                </svg>
+                <span class="hidden sm:block">Svenska Rullstolsinnebandylandslaget</span>
+                <span class="sm:hidden">Landslaget</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#om-oss" class="text-slate-600 hover:text-[#00386B] font-semibold transition-colors duration-300">Om Oss</a>
+                <a href="#sponsorer" class="text-slate-600 hover:text-[#00386B] font-semibold transition-colors duration-300">För Företag</a>
+                <a href="#stotta-oss" class="text-slate-600 hover:text-[#00386B] font-semibold transition-colors duration-300">För Privatpersoner</a>
+            </div>
+            <a href="#stotta-oss" class="hidden md:inline-block bg-[#FFCD00] text-[#00386B] font-bold py-2 px-5 rounded-full hover:bg-yellow-400 transition-transform duration-300 hover:scale-105 shadow-sm">
+                Stötta Oss
+            </a>
+             <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-[#00386B]">
+                ☰
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="#om-oss" class="block text-slate-600 hover:text-[#00386B] font-semibold py-2">Om Oss</a>
+            <a href="#sponsorer" class="block text-slate-600 hover:text-[#00386B] font-semibold py-2">För Företag</a>
+            <a href="#stotta-oss" class="block text-slate-600 hover:text-[#00386B] font-semibold py-2">För Privatpersoner</a>
+            <a href="#stotta-oss" class="block bg-[#FFCD00] text-[#00386B] text-center font-bold mt-2 py-2 px-5 rounded-full hover:bg-yellow-400 transition-transform duration-300 hover:scale-105 shadow-sm">
+                Stötta Oss
+            </a>
         </div>
     </header>
 
-    <nav class="navbar">
-        <div class="container">
-            <a href="#" class="logo">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                      <path d="M 20,40 L 20,60 L 30,60 L 30,50 L 50,50 L 50,60 L 60,60 L 60,40 L 50,40 L 50,30 L 30,30 L 30,40 Z" />
-                      <path d="M 5,20 L 5,30 L 15,30 L 15,10 L 35,10 L 35,20 Z" />
-                      <path d="M 65,20 L 65,10 L 85,10 L 85,30 L 95,30 L 95,20 Z" />
-                    </g>
-                </svg>
-                <span>Svenska Rullstolsinnebandylandslaget</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#om-oss">Om Oss</a></li>
-                <li><a href="#galleri">Galleri</a></li> <li><a href="#sponsorer">För Företag</a></li>
-                <li><a href="#stotta-oss">För Privatpersoner</a></li>
-            </ul>
-        </div>
-    </nav>
-    
-    <section id="om-oss" class="section section-light">
-        <div class="container fade-in">
-            <h2 class="section-title">En Motståndare Vi Inte Kan Besegra Ensamna</h2>
-            <p>Just nu står vår passion och vår talang inför en tyst läktare. Mästerskapen hägrar, men reskassan är tom. Till skillnad från många andra landslag får vi inga statliga bidrag för att tävla. Varje resa, varje turnering och varje chans att bära landslagströjan är helt beroende av människor och företag som tror på oss. Var med och skriv historia med oss. Ert stöd är inte bara ett bidrag – det är bränslet som tar oss till VM.</p>
-            <img src="pictures/team-huddle.jpg" alt="Svenska Rullstolsinnebandylandslaget i en huddle" class="content-image fade-in">
-            <p>Vi är ett lag fyllt av dedikation, hårt arbete och en obändig vilja att lyckas. Genom åren har vi visat att vi kan mäta oss med de bästa i världen, men utan ekonomiska medel blir drömmen svår att uppnå. Ditt stöd gör en verklig skillnad för varje enskild spelare och för hela lagets möjlighet att tävla på den internationella scenen.</p>
-        </div>
-    </section>
+    <main>
 
-    <section id="galleri" class="section section-dark">
-        <div class="container fade-in">
-            <h2 class="section-title">Våra Ögonblick på Planen</h2>
-            <p>Upplev spänningen och gemenskapen! Här kan du se bilder från våra matcher och träningar, som visar den passion och kämpaglöd som driver oss framåt.</p>
-
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="pictures/carousel-1.jpg" alt="Rullstolsinnebandyspelare i action"></div>
-                    <div class="swiper-slide"><img src="pictures/carousel-2.jpg" alt="Lagkamrater firar mål"></div>
-                    <div class="swiper-slide"><img src="pictures/carousel-3.jpg" alt="Fokuserad spelare med klubba"></div>
-                    <div class="swiper-slide"><img src="pictures/carousel-4.jpg" alt="Lagfoto efter match"></div>
-                    <div class="swiper-slide"><img src="pictures/carousel-5.jpg" alt="Intensivt spel runt målet"></div>
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+        <!-- Hero Section -->
+        <section class="hero-bg bg-cover bg-center text-white">
+            <div class="container mx-auto px-6 py-32 md:py-48 text-center">
+                <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-4 text-shadow-lg reveal">BLI EN DEL AV VÅR RESA</h1>
+                <h2 class="text-4xl md:text-6xl font-black tracking-tight text-[#FFCD00] mb-6 reveal" style="transition-delay: 200ms;">TILLSAMMANS MOT GULDET!</h2>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl mb-8 font-light text-slate-200 reveal" style="transition-delay: 400ms;">
+                    Vi är Svenska Rullstolsinnebandylandslaget. Vi är atleter, vi är kämpar och vi bär med stolthet de blågula färgerna. Vår dröm är att representera Sverige, men vi kan inte göra det utan ditt stöd.
+                </p>
+                <a href="#stotta-oss" class="bg-[#FFCD00] text-[#00386B] font-bold text-lg py-4 px-10 rounded-full hover:bg-yellow-400 transition-transform duration-300 hover:scale-105 shadow-lg reveal" style="transition-delay: 600ms;">
+                    Stötta Oss Nu
+                </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="sponsorer" class="section">
-        <div class="container fade-in">
-            <h2 class="section-title">FÖR FÖRETAG – EN INVESTERING I STOLTHET</h2>
-            <p>Att sponsra Svenska Rullstolsinnebandylandslaget är mer än en logotyp. Det är ett partnerskap som visar att ert företag står för inkludering, mångfald och en orubblig tro på att inga hinder är för stora. Låt oss tillsammans skapa en vinnande historia!</p>
-            
-            <div class="sponsors-grid">
-                <div class="sponsor-card platinum fade-in">
-                    <h3>PLATINA</h3>
-                    <p class="price">50 000 KR</p>
-                    <ul>
-                        <li>Logotyp på bröstet på matchtröjan</li>
-                        <li>Presenteras som Huvudsponsor digitalt</li>
-                        <li>Minst 5 dedikerade inlägg på sociala medier</li>
-                        <li>Exklusivt event med laget</li>
-                        <li>Signerad matchtröja</li>
-                        <li>Möjlighet att medverka i pressmeddelanden</li>
-                    </ul>
+        <!-- Om Oss Section -->
+        <section id="om-oss" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-[#00386B] mb-12 section-title">En Motståndare Vi Inte Kan Besegra Ensamna</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-8">
+                        Just nu står vår passion och vår talang inför en tyst läktare. Mästerskapen hägrar, men reskassan är tom. Till skillnad från många andra landslag får vi inga statliga bidrag för att tävla. Varje resa, varje turnering och varje chans att bära landslagströjan är helt beroende av människor och företag som tror på oss.
+                    </p>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed font-semibold">
+                        Var med och skriv historia med oss. Ert stöd är inte bara ett bidrag – det är bränslet som tar oss till VM.
+                    </p>
                 </div>
-                <div class="sponsor-card gold fade-in">
-                    <h3>GULD</h3>
-                    <p class="price">30 000 KR</p>
-                    <ul>
-                        <li>Logotyp på matchtröjans ärm</li>
-                        <li>Presenteras som Guldsponsor digitalt</li>
-                        <li>Minst 3 dedikerade inlägg på sociala medier</li>
-                        <li>Signerad matchtröja</li>
-                        <li>Möjlighet att använda lagbilder i marknadsföring</li>
-                    </ul>
-                </div>
-                <div class="sponsor-card silver fade-in">
-                    <h3>SILVER</h3>
-                    <p class="price">10 000 KR</p>
-                    <ul>
-                        <li>Logotyp på uppvärmningströjor</li>
-                        <li>Listas som Silversponsor på hemsidan</li>
-                        <li>Gemensamt tack-inlägg i sociala medier</li>
-                        <li>Certifikat för ert stöd</li>
-                    </ul>
-                </div>
-                <div class="sponsor-card bronze fade-in">
-                    <h3>BRONS</h3>
-                    <p class="price">5 000 KR</p>
-                    <ul>
-                        <li>Logotyp på vår hemsida</li>
-                        <li>Inkluderas i gemensamt tack-inlägg</li>
-                        <li>Ert företag nämns i nyhetsbrev</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="stotta-oss" class="section section-light">
-        <div class="container fade-in">
-            <h2 class="section-title">FÖR DIG – BLI VÅR SJÄTTE SPELARE!</h2>
-            <p>Varje krona räknas, varje hejarop stärker oss. Ditt bidrag, oavsett storlek, är en direktbiljett för en spelare att kunna följa med på resan och jaga sina drömmar. Du blir en del av laget och en avgörande kraft i vår jakt på medaljer. Tack!</p>
-
-            <div class="support-methods">
-                <div class="support-card fade-in">
-                    <h3>SWISHA DITT STÖD</h3>
-                    <p>Öppna din Swish-app och skicka ditt bidrag. Enkelt, snabbt och ovärderligt för oss.</p>
-                    <div class="swish-details">
-                        <p>Nummer: <span class="swish-number">123 90 90 90 9</span></p>
-                        <p>Mottagare: <span>Svenska Rullstolsinnebandy</span></p>
-                        <p>Meddelande: <span>Go Sweden! 🇸🇪</span></p>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                     <div class="reveal">
+                        <!-- BILD-PLATSHÅLLARE: Byt ut 'images/lagbild.jpg' mot sökvägen till din lagbild. -->
+                        <img src="images/lagbild.jpg" alt="Svenska Rullstolsinnebandylandslaget i en huddle" class="rounded-lg shadow-2xl w-full">
                     </div>
-                </div>
-                <div class="support-card fade-in">
-                    <h3>BANKÖVERFÖRING</h3>
-                    <p>För dig som föredrar en klassisk banköverföring.</p>
-                    <div class="bank-details">
-                        <p>Bankgiro: <span>555-1234</span></p>
-                        <p>Mottagare: <span>Stiftelsen Svensk Rullstolsinnebandy</span></p>
-                        <p>Meddelande/OCR: <span>Ditt Namn + Gåva</span></p>
+                     <div class="text-left reveal" style="transition-delay: 200ms;">
+                        <h3 class="text-2xl font-bold text-[#00386B] mb-4">Vår Drivkraft</h3>
+                         <p class="text-slate-600 leading-relaxed">
+                            Vi är ett lag fyllt av dedikation, hårt arbete och en obändig vilja att lyckas. Genom åren har vi visat att vi kan mäta oss med de bästa i världen, men utan ekonomiska medel blir drömmen svår att uppnå. Ditt stöd gör en verklig skillnad för varje enskild spelare och för hela lagets möjlighet att tävla på den internationella scenen.
+                        </p>
                     </div>
                 </div>
             </div>
-            <img src="pictures/support-image.jpg" alt="Rullstolsinnebandyspelare med glädje" class="content-image fade-in" style="margin-top: 4rem;">
-            <p>Ditt bidrag bidrar direkt till våra kostnader för resor, boende, utrustning och träning. Det ger våra spelare möjlighet att fokusera på sporten och att representera Sverige med stolthet. Var med och gör skillnad!</p>
-        </div>
-    </section>
+        </section>
 
-    <footer class="footer">
-        <div class="container fade-in">
-            <h3>FÖLJ VÅR RESA MOT GULDET!</h3>
-            <p>Håll dig uppdaterad med de senaste nyheterna, resultaten och lagets framsteg genom att följa oss på sociala medier.</p>
-            <div class="social-links">
-                <a href="https://instagram.com/svenskarullstolsinnebandy" target="_blank" title="Instagram">
+        <!-- Galleri Section -->
+        <section id="galleri" class="bg-[#00386B] text-white py-20 md:py-32">
+             <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-[#FFCD00] mb-12 section-title">Våra Ögonblick på Planen</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-300 leading-relaxed mb-12">
+                        Upplev spänningen och gemenskapen! Här är bilder från matcher och träningar som visar den passion och kämpaglöd som driver oss framåt.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+                    <!-- BILD-PLATSHÅLLARE: Byt ut 'images/galleri-1.jpg' mot sökvägen till din första galleribild. -->
+                    <img src="images/galleri-1.jpg" alt="Rullstolsinnebandyspelare i action" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 aspect-video object-cover">
+                    <!-- BILD-PLATSHÅLLARE: Byt ut 'images/galleri-2.jpg' mot sökvägen till din andra galleribild. -->
+                    <img src="images/galleri-2.jpg" alt="Lagkamrater firar mål" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 aspect-video object-cover">
+                    <!-- BILD-PLATSHÅLLARE: Byt ut 'images/galleri-3.jpg' mot sökvägen till din tredje galleribild. -->
+                    <img src="images/galleri-3.jpg" alt="Fokuserad spelare med klubba" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 aspect-video object-cover">
+                    <!-- BILD-PLATSHÅLLARE: Byt ut 'images/galleri-4.jpg' mot sökvägen till din fjärde galleribild. -->
+                    <img src="images/galleri-4.jpg" alt="Lagfoto efter match" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 aspect-video object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Sponsorer Section -->
+        <section id="sponsorer" class="py-20 md:py-32 bg-slate-100">
+            <div class="container mx-auto px-6 text-center">
+                 <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-[#00386B] mb-12 section-title">FÖR FÖRETAG – EN INVESTERING I STOLTHET</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-16">
+                        Att sponsra oss är mer än en logotyp. Det är ett partnerskap som visar att ert företag står för inkludering, mångfald och en orubblig tro på att inga hinder är för stora. Låt oss tillsammans skapa en vinnande historia!
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Platina -->
+                    <div class="reveal bg-white rounded-xl shadow-lg p-8 border-t-8 border-[#00386B] flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <h3 class="text-2xl font-black text-[#00386B] mb-2">PLATINA</h3>
+                        <p class="text-4xl font-bold text-slate-800 mb-6">50 000 KR</p>
+                        <ul class="text-left space-y-3 text-slate-600 flex-grow">
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Logotyp på bröstet på matchtröjan</li>
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Huvudsponsor digitalt</li>
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> 5+ dedikerade inlägg (sociala medier)</li>
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Exklusivt event med laget</li>
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Signerad matchtröja</li>
+                        </ul>
+                    </div>
+                     <!-- Guld -->
+                    <div class="reveal bg-white rounded-xl shadow-lg p-8 border-t-8 border-[#FFCD00] flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" style="transition-delay: 100ms;">
+                        <h3 class="text-2xl font-black text-[#00386B] mb-2">GULD</h3>
+                        <p class="text-4xl font-bold text-slate-800 mb-6">30 000 KR</p>
+                        <ul class="text-left space-y-3 text-slate-600 flex-grow">
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Logotyp på matchtröjans ärm</li>
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Guldsponsor digitalt</li>
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> 3+ dedikerade inlägg (sociala medier)</li>
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Signerad matchtröja</li>
+                        </ul>
+                    </div>
+                     <!-- Silver -->
+                    <div class="reveal bg-white rounded-xl shadow-lg p-8 border-t-8 border-slate-400 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" style="transition-delay: 200ms;">
+                        <h3 class="text-2xl font-black text-[#00386B] mb-2">SILVER</h3>
+                        <p class="text-4xl font-bold text-slate-800 mb-6">10 000 KR</p>
+                        <ul class="text-left space-y-3 text-slate-600 flex-grow">
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Logotyp på uppvärmningströjor</li>
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Silversponsor på hemsidan</li>
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Gemensamt tack-inlägg</li>
+                        </ul>
+                    </div>
+                     <!-- Brons -->
+                    <div class="reveal bg-white rounded-xl shadow-lg p-8 border-t-8 border-orange-400 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" style="transition-delay: 300ms;">
+                        <h3 class="text-2xl font-black text-[#00386B] mb-2">BRONS</h3>
+                        <p class="text-4xl font-bold text-slate-800 mb-6">5 000 KR</p>
+                        <ul class="text-left space-y-3 text-slate-600 flex-grow">
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Logotyp på vår hemsida</li>
+                            <li class="flex items-start"><span class="text-[#FFCD00] mr-3">✔</span> Inkluderas i tack-inlägg</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stötta Oss Section -->
+        <section id="stotta-oss" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                 <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-[#00386B] mb-12 section-title">FÖR DIG – BLI VÅR SJÄTTE SPELARE!</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-16">
+                        Varje krona räknas, varje hejarop stärker oss. Ditt bidrag, oavsett storlek, är en direktbiljett för en spelare att kunna följa med på resan och jaga sina drömmar. Du blir en del av laget och en avgörande kraft i vår jakt på medaljer. Tack!
+                    </p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-8">
+                    <!-- Swish -->
+                    <div class="reveal bg-white rounded-xl shadow-xl p-8 md:p-10 w-full max-w-md border-b-8 border-purple-600">
+                        <h3 class="text-3xl font-bold text-[#00386B] mb-4">SWISHA DITT STÖD</h3>
+                        <p class="text-slate-600 mb-6">Öppna din Swish-app och skicka ditt bidrag. Enkelt, snabbt och ovärderligt för oss.</p>
+                        <div class="bg-slate-100 p-6 rounded-lg text-left">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-slate-500">Nummer</span>
+                                <span class="font-mono font-bold text-lg text-purple-700">123 90 90 90 9</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-slate-500">Mottagare</span>
+                                <span class="font-semibold text-slate-700">Svenska Rullstolsinnebandy</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500">Meddelande</span>
+                                <span class="font-semibold text-slate-700">Go Sweden! 🇸🇪</span>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Bankgiro -->
+                    <div class="reveal bg-white rounded-xl shadow-xl p-8 md:p-10 w-full max-w-md border-b-8 border-[#00386B]">
+                        <h3 class="text-3xl font-bold text-[#00386B] mb-4">BANKÖVERFÖRING</h3>
+                        <p class="text-slate-600 mb-6">För dig som föredrar en klassisk banköverföring.</p>
+                        <div class="bg-slate-100 p-6 rounded-lg text-left">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-slate-500">Bankgiro</span>
+                                <span class="font-mono font-bold text-lg text-[#00386B]">555-1234</span>
+                            </div>
+                             <div class="flex justify-between items-center mb-2">
+                                <span class="text-slate-500">Mottagare</span>
+                                <span class="font-semibold text-slate-700">Stiftelsen Sv. Rullstolsinnebandy</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500">Meddelande</span>
+                                <span class="font-semibold text-slate-700">Gåva + Ditt Namn</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#00386B] text-white">
+        <div class="container mx-auto px-6 py-16 text-center">
+            <h3 class="text-3xl font-extrabold text-[#FFCD00] mb-4">FÖLJ VÅR RESA MOT GULDET!</h3>
+            <p class="max-w-xl mx-auto text-slate-300 mb-8">
+                Håll dig uppdaterad med de senaste nyheterna, resultaten och lagets framsteg genom att följa oss på sociala medier.
+            </p>
+            <div class="flex justify-center space-x-6 mb-10">
+                <a href="https://instagram.com/svenskarullstolsinnebandy" target="_blank" title="Instagram" class="text-4xl text-slate-300 hover:text-[#FFCD00] hover:scale-110 transition-all duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-                      <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8s.01 2.444.048 3.297c.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.444-.048-3.298c-.04-.851-.174-1.433-.372-1.942a3.916 3.916 0 0 0-.923-1.417A3.916 3.916 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 8 0zm0 1.44c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.282.24.705.275 1.486.039.843.047 1.096.047 3.232s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.11.281-.24.705-.275 1.485-.038.843-.046 1.096-.046-3.232s.008-2.389.046-3.232c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.843-.038 1.096-.047 3.232-.047zM8 4.868a3.132 3.132 0 1 0 0 6.264 3.132 3.132 0 0 0 0-6.264zm0 5.164a2.032 2.032 0 1 1 0-4.064 2.032 2.032 0 0 1 0 4.064zm4.002-6.17a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92z"/>
+                      <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8s.01 2.444.048 3.297c.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.444-.048-3.298c-.04-.851-.174-1.433-.372-1.942a3.916 3.916 0 0 0-.923-1.417A3.916 3.916 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 8 0M8 4.868a3.132 3.132 0 1 0 0 6.264 3.132 3.132 0 0 0 0-6.264m0 5.164a2.032 2.032 0 1 1 0-4.064 2.032 2.032 0 0 1 0 4.064m4.002-6.17a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92z"/>
                     </svg>
                 </a>
-                <a href="https://facebook.com/svenskarullstolsinnebandy" target="_blank" title="Facebook">
+                <a href="https://facebook.com/svenskarullstolsinnebandy" target="_blank" title="Facebook" class="text-4xl text-slate-300 hover:text-[#FFCD00] hover:scale-110 transition-all duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
                       <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
                     </svg>
                 </a>
             </div>
-            <p class="copyright">&copy; 2025 Svenska Rullstolsinnebandylandslaget. Tillsammans är vi ostoppbara!</p>
+            <p class="text-slate-400 text-sm">&copy; 2025 Svenska Rullstolsinnebandylandslaget. Tillsammans är vi ostoppbara!</p>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Navbar scroll effect
-            const navbar = document.querySelector('.navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-            // Initialize Swiper
-            const swiper = new Swiper('.swiper-container', {
-                effect: 'coverflow',
-                grabCursor: true,
-                centeredSlides: true,
-                slidesPerView: 'auto',
-                coverflowEffect: {
-                    rotate: 50,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 1,
-                    slideShadows: true,
-                },
-                loop: true, // Loop through slides
-                autoplay: {
-                    delay: 3500, // Change slide every 3.5 seconds
-                    disableOnInteraction: false, // Continue autoplay even if user interacts
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-            });
-
-            // Fade-in on scroll
-            const fadeInElements = document.querySelectorAll('.fade-in');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('appear');
-                        observer.unobserve(entry.target); // Stop observing once it's visible
-                    }
-                });
-            }, {
-                threshold: 0.2 // Trigger when 20% of the element is visible
-            });
-
-            fadeInElements.forEach(element => {
-                observer.observe(element);
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Hide mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
             });
         });
+
+        // Scroll animations
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                } else {
+                    // Optional: remove active class to re-trigger animation on scroll up
+                    // reveals[i].classList.remove("active"); 
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Trigger on load
+        reveal();
     </script>
 </body>
 </html>
+
+
+
