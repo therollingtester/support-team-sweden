@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Mobilvy Förhandsvisning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cup-base-size: clamp(60px, 12vw, 80px); 
+        }
+
+        /* Grundläggande sidinställningar för att centrera mobilen */
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f2f5; /* Ljusgrå bakgrund som liknar en app-bakgrund */
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
+
+        /* Ramen som ser ut som en mobiltelefon */
+        .mobile-frame {
+            width: 100%;
+            max-width: 420px;
+            background: #111;
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 2px rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Själva Instagram-gränssnittet inuti ramen */
+        .instagram-ui {
+            background: #FFF;
+            border-radius: 30px;
+            overflow: hidden;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            color: #262626;
+        }
+
+        /* Header med profilbild och namn */
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+        }
+        .profile-pic {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            padding: 2px;
+        }
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+        .profile-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-left: 12px;
+        }
+        .options-icon { margin-left: auto; } /* Flyttar "..." till höger */
+
+        /* Bild-delen av inlägget (innehållet från förra filen) */
+        .post-content {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(20px, 8%, 40px);
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+        }
+        .hero-bg {
+            background-size: cover;
+            background-position: center;
+            background-image: 
+                linear-gradient(rgba(0, 56, 107, 0.8), rgba(0, 56, 107, 0.8)), 
+                url('images/actionbild.jpg');
+        }
+        .post-content h1 {
+            font-size: clamp(1.8rem, 8vw, 2.5rem);
+            line-height: 1.15;
+            margin: 0 0 0.5em 0;
+            color: #FFCD00;
+            font-weight: 900;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+            letter-spacing: -1px;
+        }
+
+        /* -- Kaffekopp och Swish-box stilar från förra filen, lätt anpassade -- */
+        .coffee-cup-container { margin-bottom: 1em; }
+        .coffee-cup { position: relative; width: var(--cup-base-size); height: calc(var(--cup-base-size) * 0.95); background: linear-gradient(to right, #f9f9f9, #d9d9d9); border-bottom-left-radius: 45%; border-bottom-right-radius: 45%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .cup-handle { position: absolute; right: calc(var(--cup-base-size) * -0.375); top: calc(var(--cup-base-size) * 0.125); width: calc(var(--cup-base-size) * 0.44); height: calc(var(--cup-base-size) * 0.56); border: calc(var(--cup-base-size) * 0.1) solid #d9d9d9; border-left-color: transparent; border-radius: 50%; transform: rotate(15deg); }
+        .coffee-cup::before { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; height: 8px; background: linear-gradient(to right, #FFCD00, #e6b800); border-radius: 50%; }
+        
+        .swish-box { background-color: rgba(255, 255, 255, 0.95); color: #00386B; padding: 10px 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); width: 100%; max-width: 280px; position: relative; }
+        .swish-title { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .swish-number { font-size: clamp(1.4rem, 5vw, 1.8rem); font-family: 'Courier New', Courier, monospace; font-weight: 700; letter-spacing: 2px; color: #663399; }
+
+        /* CSS för Swish-ikonen */
+        .swish-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: auto;
+        }
+
+        /* Knappar under bilden */
+        .post-actions {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+        }
+        .post-actions svg {
+            margin-right: 16px;
+            cursor: pointer;
+        }
+        .bookmark-icon { margin-left: auto; margin-right: 0; }
+
+        /* Gilla-räknare och bildtext */
+        .post-info {
+            padding: 0 16px 16px 16px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .likes { font-weight: 600; margin-bottom: 8px; }
+        .caption .username { font-weight: 600; }
+        .caption .hashtag { color: #00376b; cursor: pointer; }
+        .view-comments { color: #8e8e8e; font-size: 14px; margin-top: 8px; cursor: pointer; }
+
+    </style>
+</head>
+<body>
+
+    <div class="mobile-frame">
+        <div class="instagram-ui">
+            
+            <header class="post-header">
+                <div class="profile-pic">
+                    <!-- Placeholder för er profilbild -->
+                    <img src="https://placehold.co/64x64/006aa7/fecc00?text=S" alt="Profilbild">
+                </div>
+                <span class="profile-name">svenskrullstolsinnebandy</span>
+                <svg class="options-icon" aria-label="Fler alternativ" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+            </header>
+
+            <div class="post-content hero-bg">
+                <div class="coffee-cup-container">
+                    <div class="coffee-cup"><div class="cup-handle"></div></div>
+                </div>
+                <h1>Bjud Rullstols&shy;innebandy&shy;landslaget på en Kaffe</h1>
+                <div class="swish-box">
+                    <img class="swish-icon" src="images/swish-logo.png" alt="Swish Logotyp">
+                    <div class="swish-title">Swisha till</div>
+                    <div class="swish-number">123 456 78 90</div>
+                </div>
+            </div>
+
+            <div class="post-actions">
+                <svg aria-label="Gilla" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-6.12 8.351C12.895 20.72 12 21.5 12 21.5s-.895-.78-2.38-2.028c-3.467-3.392-6.12-5.279-6.12-8.351a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175 2.489 1.175 3.33 0a4.21 4.21 0 0 1 3.675-1.941z"></path></svg>
+                <svg aria-label="Kommentera" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                <svg aria-label="Dela inlägg" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                <svg class="bookmark-icon" aria-label="Spara" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+            </div>
+
+            <div class="post-info">
+                <div class="likes">Gillas av <b>pamelaanderson</b> och <b>1,234 andra</b></div>
+                <div class="caption">
+                    <span class="username">svenskrullstolsinnebandy</span> 
+                    Vår resa mot Världsmästerskapen står på spel, och vi behöver er i laget! 🇸🇪<br><br>
+                    Precis som förra gången kör vi en enkel insamling: Bjud oss på en fiktiv kopp kaffe! För dig är det en liten gest, men för oss blir varje "kaffe" till en flygbiljett, en hotellnatt eller en anmälningsavgift. Det är vår chans att få dra på oss landslagströjan och representera Sverige! 💙💛<br><br>
+                    Swisha ditt stöd – varje krona tar oss närmare drömmen!<br>
+                    <span class="hashtag">#rullstolsinnebandy</span> <span class="hashtag">#sverige</span> <span class="hashtag">#tillsammans</span> <span class="hashtag">#vägentillvm</span> <span class="hashtag">#hejasverige</span>
+                </div>
+                <div class="view-comments">Visa alla 42 kommentarer</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
