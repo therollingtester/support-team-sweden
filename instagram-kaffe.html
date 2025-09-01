@@ -114,26 +114,25 @@
         .swish-box { 
             background-color: rgba(255, 255, 255, 0.95); 
             color: #00386B; 
-            padding: 10px 15px; /* Justerad padding */
+            padding: 10px 25px; /* Ökad horisontell padding för luft */
             border-radius: 12px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
-            width: 100%; 
-            max-width: 280px; 
-            display: flex; /* NY: Använder flexbox */
-            align-items: center; /* NY: Centrerar vertikalt */
-            justify-content: center; /* NY: Centrerar horisontellt */
-            gap: 15px; /* NY: Avstånd mellan logga och text */
+            display: inline-flex; /* ÄNDRING: Får rutan att anpassa sig efter innehållet */
+            align-items: center; 
+            justify-content: center; 
+            gap: 15px;
+            max-width: 90%; /* Säkerställer att den inte blir för bred på små skärmar */
         }
         .swish-text-container {
-             text-align: left; /* NY: Vänsterställer texten */
+             text-align: left;
         }
         .swish-title { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
         .swish-number { font-size: clamp(1.2rem, 5vw, 1.6rem); font-family: 'Courier New', Courier, monospace; font-weight: 700; letter-spacing: 1px; color: #663399; white-space: nowrap; }
 
         .swish-icon {
-            width: 32px; /* Justerad storlek */
+            width: 32px;
             height: auto;
-            flex-shrink: 0; /* Förhindrar att ikonen krymper */
+            flex-shrink: 0;
         }
 
         /* Knappar under bilden */
@@ -190,7 +189,7 @@
             </div>
 
             <div class="post-actions">
-                <svg aria-label="Gilla" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-6.12 8.351C12.895 20.72 12 21.5 12 21.5s-.895-.78-2.38-2.028c-3.467-3.392-6.12-5.279-6.12-8.351a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175 2.489 1.175 3.33 0a4.21 4.21 0 0 1 3.675-1.941z"></path></svg>
+                <svg aria-label="Gilla" color="#262626" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                 <svg aria-label="Kommentera" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
                 <svg aria-label="Dela inlägg" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
                 <svg class="bookmark-icon" aria-label="Spara" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
@@ -213,6 +212,5 @@
 
 </body>
 </html>
-
 
 
