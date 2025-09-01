@@ -105,24 +105,35 @@
             letter-spacing: -1px;
         }
 
-        /* -- Kaffekopp och Swish-box stilar från förra filen, lätt anpassade -- */
+        /* -- Kaffekopp och Swish-box stilar -- */
         .coffee-cup-container { margin-bottom: 1em; }
         .coffee-cup { position: relative; width: var(--cup-base-size); height: calc(var(--cup-base-size) * 0.95); background: linear-gradient(to right, #f9f9f9, #d9d9d9); border-bottom-left-radius: 45%; border-bottom-right-radius: 45%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .cup-handle { position: absolute; right: calc(var(--cup-base-size) * -0.375); top: calc(var(--cup-base-size) * 0.125); width: calc(var(--cup-base-size) * 0.44); height: calc(var(--cup-base-size) * 0.56); border: calc(var(--cup-base-size) * 0.1) solid #d9d9d9; border-left-color: transparent; border-radius: 50%; transform: rotate(15deg); }
         .coffee-cup::before { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; height: 8px; background: linear-gradient(to right, #FFCD00, #e6b800); border-radius: 50%; }
         
-        .swish-box { background-color: rgba(255, 255, 255, 0.95); color: #00386B; padding: 10px 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); width: 100%; max-width: 280px; position: relative; }
+        .swish-box { 
+            background-color: rgba(255, 255, 255, 0.95); 
+            color: #00386B; 
+            padding: 10px 15px; /* Justerad padding */
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+            width: 100%; 
+            max-width: 280px; 
+            display: flex; /* NY: Använder flexbox */
+            align-items: center; /* NY: Centrerar vertikalt */
+            justify-content: center; /* NY: Centrerar horisontellt */
+            gap: 15px; /* NY: Avstånd mellan logga och text */
+        }
+        .swish-text-container {
+             text-align: left; /* NY: Vänsterställer texten */
+        }
         .swish-title { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
-        .swish-number { font-size: clamp(1.4rem, 5vw, 1.8rem); font-family: 'Courier New', Courier, monospace; font-weight: 700; letter-spacing: 2px; color: #663399; }
+        .swish-number { font-size: clamp(1.2rem, 5vw, 1.6rem); font-family: 'Courier New', Courier, monospace; font-weight: 700; letter-spacing: 1px; color: #663399; white-space: nowrap; }
 
-        /* CSS för Swish-ikonen */
         .swish-icon {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 28px;
+            width: 32px; /* Justerad storlek */
             height: auto;
+            flex-shrink: 0; /* Förhindrar att ikonen krymper */
         }
 
         /* Knappar under bilden */
@@ -171,8 +182,10 @@
                 <h1>Bjud Rullstols&shy;innebandy&shy;landslaget på en Kaffe</h1>
                 <div class="swish-box">
                     <img class="swish-icon" src="images/swish-logo.png" alt="Swish Logotyp">
-                    <div class="swish-title">Swisha till</div>
-                    <div class="swish-number">123 456 78 90</div>
+                    <div class="swish-text-container">
+                        <div class="swish-title">Swisha till</div>
+                        <div class="swish-number">123 456 78 90</div>
+                    </div>
                 </div>
             </div>
 
@@ -190,7 +203,7 @@
                     Vår resa mot Världsmästerskapen står på spel, och vi behöver er i laget! 🇸🇪<br><br>
                     Precis som förra gången kör vi en enkel insamling: Bjud oss på en fiktiv kopp kaffe! För dig är det en liten gest, men för oss blir varje "kaffe" till en flygbiljett, en hotellnatt eller en anmälningsavgift. Det är vår chans att få dra på oss landslagströjan och representera Sverige! 💙💛<br><br>
                     Swisha ditt stöd – varje krona tar oss närmare drömmen!<br>
-                    <span class="hashtag">#rullstolsinnebandy</span> <span class="hashtag">#sverige</span> <span class="hashtag">#tillsammans</span> <span class="hashtag">#vägentillvm</span> <span class="hashtag">#hejasverige</span>
+                    <span class="hashtag">#rullstolsinnebandy</span> <span class="hashtag">#sverige</span> <span class="hashtag">#tillsammans</span> <span class="hashtag">#vägentillvm</span> <span class="hashtag">#hejasverige</span> <span class="hashtag">#folksporten</span> <span class="hashtag">#parainnebandy</span>
                 </div>
                 <div class="view-comments">Visa alla 42 kommentarer</div>
             </div>
@@ -200,7 +213,6 @@
 
 </body>
 </html>
-
 
 
 
