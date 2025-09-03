@@ -74,7 +74,7 @@
         }
         .options-icon { margin-left: auto; } /* Flyttar "..." till höger */
 
-        /* Bild-delen av inlägget (innehållet från förra filen) */
+        /* Bild-delen av inlägget */
         .post-content {
             width: 100%;
             aspect-ratio: 1 / 1;
@@ -107,21 +107,120 @@
 
         /* -- Kaffekopp och Swish-box stilar -- */
         .coffee-cup-container { margin-bottom: 1em; }
-        .coffee-cup { position: relative; width: var(--cup-base-size); height: calc(var(--cup-base-size) * 0.95); background: linear-gradient(to right, #f9f9f9, #d9d9d9); border-bottom-left-radius: 45%; border-bottom-right-radius: 45%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .cup-handle { position: absolute; right: calc(var(--cup-base-size) * -0.375); top: calc(var(--cup-base-size) * 0.125); width: calc(var(--cup-base-size) * 0.44); height: calc(var(--cup-base-size) * 0.56); border: calc(var(--cup-base-size) * 0.1) solid #d9d9d9; border-left-color: transparent; border-radius: 50%; transform: rotate(15deg); }
-        .coffee-cup::before { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; height: 8px; background: linear-gradient(to right, #FFCD00, #e6b800); border-radius: 50%; }
+        .coffee-cup { 
+            position: relative; 
+            width: var(--cup-base-size); 
+            height: calc(var(--cup-base-size) * 0.95); 
+            background: linear-gradient(to right, #f9f9f9, #d9d9d9); 
+            border-bottom-left-radius: 45%; 
+            border-bottom-right-radius: 45%; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+        }
+        .cup-handle { 
+            position: absolute; 
+            right: calc(var(--cup-base-size) * -0.375); 
+            top: calc(var(--cup-base-size) * 0.125); 
+            width: calc(var(--cup-base-size) * 0.44); 
+            height: calc(var(--cup-base-size) * 0.56); 
+            border: calc(var(--cup-base-size) * 0.1) solid #d9d9d9; 
+            border-left-color: transparent; border-radius: 50%; 
+            transform: rotate(15deg); 
+        }
+        .coffee-cup::before { 
+            content: ''; 
+            position: absolute; 
+            top: 5px; 
+            left: 5px; 
+            right: 5px; 
+            height: 8px; 
+            background: linear-gradient(to right, #FFCD00, #e6b800); 
+            border-radius: 50%; 
+            z-index: 1;
+        }
+
+        /* -- NY CSS FÖR ANIMERAD RÖK -- */
+        .steam-container {
+            position: absolute;
+            bottom: 90%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: calc(var(--cup-base-size) * 0.8);
+            filter: blur(calc(var(--cup-base-size) * 0.03));
+            z-index: 0;
+        }
+        .steam-wisp {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: calc(var(--cup-base-size) * 0.4);
+            height: calc(var(--cup-base-size) * 0.5);
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            opacity: 0;
+            animation: steamRise 6s infinite ease-out;
+        }
+        .steam-wisp:nth-child(1) {
+            left: 45%;
+            animation-delay: 0s;
+            animation-duration: 5s;
+        }
+        .steam-wisp:nth-child(2) {
+            left: 60%;
+            animation-delay: 2s;
+            animation-duration: 6s;
+        }
+        .steam-wisp:nth-child(3) {
+            left: 30%;
+            animation-delay: 3.5s;
+            animation-duration: 5.5s;
+        }
+
+        @keyframes steamRise {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(calc(var(--cup-base-size) * -1.2)) scale(1.5);
+                opacity: 0;
+            }
+        }
+        /* -- SLUT PÅ RÖK-CSS -- */
+
+        .donation-suggestion {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 999px;
+            padding: 8px 18px;
+            font-size: clamp(0.8rem, 3.5vw, 1rem);
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        .donation-suggestion code {
+            background-color: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
         
         .swish-box { 
             background-color: rgba(255, 255, 255, 0.95); 
             color: #00386B; 
-            padding: 10px 25px; /* Ökad horisontell padding för luft */
+            padding: 10px 25px;
             border-radius: 12px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
-            display: inline-flex; /* ÄNDRING: Får rutan att anpassa sig efter innehållet */
+            display: inline-flex;
             align-items: center; 
             justify-content: center; 
             gap: 15px;
-            max-width: 90%; /* Säkerställer att den inte blir för bred på små skärmar */
+            max-width: 90%;
         }
         .swish-text-container {
              text-align: left;
@@ -158,6 +257,22 @@
         .caption .hashtag { color: #00376b; cursor: pointer; }
         .view-comments { color: #8e8e8e; font-size: 14px; margin-top: 8px; cursor: pointer; }
 
+        .swish-message-prompt {
+            background-color: #eaf3ff;
+            border-left: 4px solid #006aa7;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+        .swish-message-prompt code {
+            background-color: #d1e5f8;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
@@ -167,7 +282,6 @@
             
             <header class="post-header">
                 <div class="profile-pic">
-                    <!-- Placeholder för er profilbild -->
                     <img src="https://placehold.co/64x64/006aa7/fecc00?text=S" alt="Profilbild">
                 </div>
                 <span class="profile-name">svenskrullstolsinnebandy</span>
@@ -176,14 +290,25 @@
 
             <div class="post-content hero-bg">
                 <div class="coffee-cup-container">
-                    <div class="coffee-cup"><div class="cup-handle"></div></div>
+                    <div class="coffee-cup">
+                        <div class="cup-handle"></div>
+                        <!-- RÖK-ELEMENT -->
+                        <div class="steam-container">
+                            <span class="steam-wisp"></span>
+                            <span class="steam-wisp"></span>
+                            <span class="steam-wisp"></span>
+                        </div>
+                    </div>
                 </div>
                 <h1>Bjud Rullstols&shy;innebandy&shy;landslaget på en Kaffe</h1>
+                <div class="donation-suggestion">
+                    <strong>50 kr</strong> med meddelandet <code>KAFFE</code>
+                </div>
                 <div class="swish-box">
                     <img class="swish-icon" src="images/swish-logo.png" alt="Swish Logotyp">
                     <div class="swish-text-container">
                         <div class="swish-title">Swisha till</div>
-                        <div class="swish-number">123 456 78 90</div>
+                        <div class="swish-number">123 392 0618</div>
                     </div>
                 </div>
             </div>
@@ -201,6 +326,9 @@
                     <span class="username">svenskrullstolsinnebandy</span> 
                     Vår resa mot Världsmästerskapen står på spel, och vi behöver er i laget! 🇸🇪<br><br>
                     Precis som förra gången kör vi en enkel insamling: Bjud oss på en fiktiv kopp kaffe! För dig är det en liten gest, men för oss blir varje "kaffe" till en flygbiljett, en hotellnatt eller en anmälningsavgift. Det är vår chans att få dra på oss landslagströjan och representera Sverige! 💙💛<br><br>
+                    <div class="swish-message-prompt">
+                        <b>Viktigt!</b> För att din gåva ska gå direkt till vår VM-resa, märk din Swish med <code>KAFFE</code> ☕️ Tack för ditt stöd!
+                    </div>
                     Swisha ditt stöd – varje krona tar oss närmare drömmen!<br>
                     <span class="hashtag">#rullstolsinnebandy</span> <span class="hashtag">#sverige</span> <span class="hashtag">#tillsammans</span> <span class="hashtag">#vägentillvm</span> <span class="hashtag">#hejasverige</span> <span class="hashtag">#folksporten</span> <span class="hashtag">#parainnebandy</span>
                 </div>
@@ -212,5 +340,4 @@
 
 </body>
 </html>
-
 
