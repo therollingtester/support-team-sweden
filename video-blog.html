@@ -21,6 +21,24 @@
         .img-fallback {
             background-color: #333;
         }
+        .section-icon {
+            transform: translateY(-50%);
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -28,9 +46,10 @@
     <!-- Hero Section -->
     <header class="hero-bg min-h-screen flex items-center justify-center text-center p-6">
         <div class="max-w-4xl">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wide">Följ Vår Resa: Mer än Bara Innebandy</h1>
-            <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-                Glöm allt du trodde du visste om rullstolsinnebandy. Vi tar er med bortom sargen, bakom stängda dörrar och rakt in i hjärtat av vårt lag. Detta är vår berättelse, ofiltrerad och på riktigt.
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wide">Följ Vår Resa</h1>
+            <h2 class="mt-2 text-2xl md:text-4xl text-yellow-400 font-bold">Mer än Bara Innebandy</h2>
+            <p class="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+                Detta är inte bara en vlogg. Det är en inbjudan till vår verklighet. Följ med oss i kampen, glädjen och den brinnande passionen för sporten som definierar oss.
             </p>
         </div>
     </header>
@@ -44,84 +63,121 @@
                         <h2 class="text-3xl md:text-4xl font-black uppercase text-yellow-400">Vår Vision</h2>
                         <h3 class="text-xl md:text-2xl font-bold mt-2">Berättelsen Bakom Varje Match</h3>
                         <p class="mt-4 text-gray-300">
-                            Vi lanserar nu en vloggserie där ni får följa oss på nära håll. Genom våra kameror kommer ni att få en unik inblick i vår vardag – från de tuffaste träningspassen till de avgörande sekunderna i en finalmatch. Vi kommer dela allt: träningar, turneringar och intervjuer. Detta är inte bara sport. Detta är storytelling om ett lag som vägrar att se hinder.
+                            Vi lanserar nu en vloggserie där ni får följa oss på nära håll. Se hur vi nöter taktik, bygger styrka och pressar oss själva till gränsen. Upplev spänningen, nervositeten och euforin från första parkett. Lär känna spelarna, tränarna och eldsjälarna som gör allt detta möjligt.
                         </p>
                     </div>
                     <div>
                         <img src="images/training-session.jpg" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/111827/FFFFFF?text=Bild+saknas';"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/111827/FFFFFF?text=Bild saknas';"
                              alt="Lagträning i rullstolsinnebandy" class="rounded-lg shadow-2xl w-full h-auto object-cover img-fallback">
-                        <!-- Replace placeholder with your image: "images/training-session.jpg" -->
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Why Section -->
-        <section class="py-20 px-6">
+        <section class="py-20 px-6 relative bg-gray-900">
             <div class="container mx-auto max-w-6xl">
                  <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div class="order-2 md:order-1">
                         <img src="images/player-closeup.jpg" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/1F2937/FFFFFF?text=Bild+saknas';"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/1F2937/FFFFFF?text=Bild saknas';"
                              alt="Närbild på en spelare" class="rounded-lg shadow-2xl w-full h-auto object-cover img-fallback">
-                        <!-- Replace placeholder with your image: "images/player-closeup.jpg" -->
                     </div>
                     <div class="text-center md:text-left order-1 md:order-2">
                         <h2 class="text-3xl md:text-4xl font-black uppercase text-yellow-400">Varför?</h2>
-                        <h3 class="text-xl md:text-2xl font-bold mt-2">För att Vår Berättelse Måste Berättas.</h3>
+                        <h3 class="text-xl md:text-2xl font-bold mt-2">För att Varje Spelare Har en Historia.</h3>
                         <p class="mt-4 text-gray-300">
-                           Det handlar om kampen, både på och utanför planen. Om prövningarna, gemenskapen och de oändliga möjligheterna. I vår vlogg utforskar vi kampen, glädjen och livet bakom matchtröjan. Detta är en historia om att övervinna hinder och att se möjligheter där andra ser begränsningar.
+                           I vårt lag finns det livsöden av alla slag. Några av oss är födda med funktionshinder. Andra har fått sina liv förändrade av en olycka och hittat en ny gnista. Vår vlogg är en hyllning till den kämparandan. Vi delar berättelserna om motgångar som blivit styrkor, om viljan att aldrig ge upp, och om elden som driver oss framåt.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Behind the Scenes Section -->
-        <section class="py-20 px-6 bg-gray-800">
-            <div class="container mx-auto max-w-5xl text-center">
-                <h2 class="text-3xl md:text-4xl font-black uppercase text-yellow-400">Bakom Kulisserna</h2>
-                <p class="mt-2 text-lg text-gray-300">Kvalitet i varje bildruta.</p>
-                <p class="mt-4 max-w-3xl mx-auto text-gray-400">
-                    För att kunna berätta vår historia på det sätt den förtjänar, har vi investerat i professionell utrustning. Vi är seriösa med vår sport och lika seriösa med hur vi delar vår resa med er.
+        <!-- Video Trailer Section -->
+        <section class="py-20 px-6 bg-black text-center">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-black uppercase">Se Vår Trailer</h2>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">Få en försmak av svettet, strategierna och den obändiga viljan att vinna. Detta är vad som väntar.</p>
+                <div class="mt-10 rounded-lg overflow-hidden shadow-2xl">
+                    <div class="video-container">
+                        <!-- Ersätt med er YouTube-video ID -->
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Olympic Dream Section -->
+        <section class="py-20 px-6 bg-gray-800 text-center">
+             <div class="container mx-auto max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-black uppercase text-yellow-400">Vår Kamp: Den Olympiska Drömmen</h2>
+                <p class="mt-4 text-lg text-gray-300">
+                    Vi kämpar inte bara för att vinna matcher – vi kämpar för något större. Vårt yttersta mål är att göra Rullstolsinnebandyn till en fullvärdig olympisk sport. Varje träning, varje match och varje avsnitt av vår vlogg är ett steg på den resan. Genom att följa oss hjälper du till att visa världen sportens passion och potential.
                 </p>
-                <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Camera -->
-                    <div class="bg-gray-900 p-8 rounded-lg">
-                        <svg class="w-12 h-12 mx-auto text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        <h3 class="mt-4 text-xl font-bold">Kamera: Sony a7CR</h3>
-                        <p class="mt-2 text-gray-400">Knivskarp, filmisk bildkvalitet som fångar varje detalj.</p>
+            </div>
+        </section>
+
+        <!-- Production Philosophy Section -->
+        <section class="py-20 px-6 bg-gray-900 text-center">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-black uppercase text-yellow-400">Vår Produktionsfilosofi</h2>
+                <h3 class="mt-2 text-xl md:text-2xl font-bold">Kvalitet i varje format</h3>
+                <p class="mt-6 text-lg text-gray-300 max-w-3xl mx-auto">
+                    Vår filosofi är att anpassa produktionen för att bäst förmedla känslan i varje ögonblick. Vi använder modern kamerateknik och professionell ljudupptagning för att skapa en närvaro som tar er direkt in i händelsernas centrum. Genom medveten ljussättning och noggrann färgkorrigering ger vi varje scen en unik, filmisk själ. Denna kvalitetsmedvetenhet genomsyrar allt vi gör, från den kortaste uppdateringen till den längsta dokumentären.
+                </p>
+                <div class="mt-12 grid md:grid-cols-3 gap-8 text-left">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-yellow-400">Huvudavsnitt: 8-12 min</h3>
+                        <p class="mt-2 text-gray-400">Perfekt för att berätta en djupare historia – som en intensiv träning eller en spelares personliga resa – utan att tappa tittarens uppmärksamhet.</p>
                     </div>
-                    <!-- Mic -->
-                    <div class="bg-gray-900 p-8 rounded-lg">
-                        <svg class="w-12 h-12 mx-auto text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
-                        <h3 class="mt-4 text-xl font-bold">Ljud: Rode Mic NTG</h3>
-                        <p class="mt-2 text-gray-400">Kristallklart ljud så ni hör varje instruktion, jubel och samtal.</p>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-yellow-400">Sociala Medier: 30-90 sek</h3>
+                        <p class="mt-2 text-gray-400">Korta, explosiva klipp för Instagram & TikTok som ger en snabb dos av spänningen och leder er till de fullständiga avsnitten.</p>
                     </div>
-                    <!-- Light -->
-                    <div class="bg-gray-900 p-8 rounded-lg">
-                         <svg class="w-12 h-12 mx-auto text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/><rect width="14" height="6" x="5" y="9" rx="2"/><path d="M12 9v-2a2 2 0 1 0-4 0v2"/><path d="M12 15v2a2 2 0 1 0 4 0v-2"/></svg>
-                        <h3 class="mt-4 text-xl font-bold">Ljus & Stabilitet</h3>
-                        <p class="mt-2 text-gray-400">Stativ, ljus och blixt för professionella produktioner i alla lägen.</p>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-yellow-400">Specialavsnitt: 20+ min</h3>
+                        <p class="mt-2 text-gray-400">Vid speciella tillfällen, som en avgörande final, producerar vi längre, mer dokumentärliknande avsnitt som ger en ofiltrerad inblick.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sponsor Section -->
+        <section class="py-20 px-6 bg-gray-800 text-center">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-black uppercase">Bli Vår Partner</h2>
+                <h3 class="mt-2 text-xl md:text-2xl font-bold text-yellow-400">Associera ert varumärke med kämparanda och passion.</h3>
+                <p class="mt-6 text-lg text-gray-300 max-w-3xl mx-auto">
+                    Detta är en unik möjlighet att synas tillsammans med en berättelse om viljestyrka och drömmar. Vi erbjuder skräddarsydda partnerskap för företag som vill bli en del av vår resa mot den olympiska drömmen.
+                </p>
+                <div class="mt-12 grid md:grid-cols-2 gap-8 text-left">
+                    <div class="bg-gray-900 p-8 rounded-lg border-2 border-yellow-400 shadow-lg">
+                        <h3 class="text-2xl font-black text-yellow-400">PLATINUM PARTNER</h3>
+                        <p class="mt-4 text-gray-300">Som vår huvudpartner blir ert varumärke en central del av vår berättelse. Ni syns med er logotyp i början och slutet av varje huvudavsnitt, får dedikerade segment där vi berättar om ert stöd, och möjlighet till organisk produktplacering. Detta är ett partnerskap där vi tillsammans skriver historia.</p>
+                    </div>
+                    <div class="bg-gray-900 p-8 rounded-lg border border-gray-600">
+                        <h3 class="text-2xl font-black" style="color: #C0C0C0;">GULD PARTNER</h3>
+                        <p class="mt-4 text-gray-300">Som guldpartner får ni en framträdande plats i vår produktion. Er logotyp exponeras tydligt i eftertexterna, ni nämns i videobeskrivningen på YouTube och får återkommande 'shoutouts' på våra sociala medier. Ert stöd lyfts fram som en avgörande del av vår framgång.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Call to Action -->
-        <section class="py-20 px-6 text-center">
+        <section class="py-20 px-6 text-center bg-yellow-400 text-gray-900">
             <div class="container mx-auto max-w-3xl">
-                <h2 class="text-3xl md:text-4xl font-black uppercase">Bli en Del av Resan</h2>
-                <p class="mt-4 text-lg text-gray-300">Är du redo att följa med? Se till att du inte missar ett enda avsnitt. Prenumerera, följ och engagera dig. Ditt stöd på läktaren och online betyder allt.</p>
+                <h2 class="text-3xl md:text-4xl font-black uppercase">Bli en del av Kampen</h2>
+                <p class="mt-4 text-lg text-gray-800">Ditt stöd är mer än en like eller prenumeration – det är en röst i vår kamp för den olympiska drömmen. Följ med på resan, hör våra historier och hjälp oss att skriva historia.</p>
                 <div class="mt-10 flex justify-center items-center gap-6 md:gap-8">
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300" title="YouTube">
+                    <a href="#" class="text-gray-900 hover:text-black transition duration-300" title="YouTube">
                         <svg class="w-10 h-10 md:w-12 md:h-12" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     </a>
-                     <a href="#" class="text-gray-400 hover:text-white transition duration-300" title="Instagram">
+                     <a href="#" class="text-gray-900 hover:text-black transition duration-300" title="Instagram">
                         <svg class="w-10 h-10 md:w-12 md:h-12" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.314 1.65 20.644 1.237 19.854.93c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.488.96-.91 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.488-1.379-.91-.42-.419-.69-.824-.91-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.859 0-3.211.016-3.586.061-4.859.061-1.17.255-1.814.42-2.234.21-.57.479-.96.91-1.381.419-.419.81-.689 1.379-.898.42-.165 1.065-.36 2.235-.413C8.414 2.18 8.79 2.16 12 2.16zm0 3.39c-3.405 0-6.162 2.757-6.162 6.162s2.757 6.162 6.162 6.162 6.162-2.757 6.162-6.162-2.757-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441c.795 0 1.439-.645 1.439-1.441s-.644-1.44-1.439-1.44z"/></svg>
                     </a>
-                     <a href="#" class="text-gray-400 hover:text-white transition duration-300" title="Facebook">
+                     <a href="#" class="text-gray-900 hover:text-black transition duration-300" title="Facebook">
                         <svg class="w-10 h-10 md:w-12 md:h-12" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>Facebook</title><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     </a>
                 </div>
@@ -136,4 +192,7 @@
 
 </body>
 </html>
+
+
+
 
