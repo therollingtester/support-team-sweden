@@ -4,7 +4,7 @@ Detta repo innehåller källkoden för en enkel webbplats samt HTML/CSS-mallar f
 ## Projektets Innehåll
 
 ### Hemsida
-- index.html: Huvudsidan för webbplatsen.
+- index.html: Huvudsidan för webbplatsen. https://therollingtester.github.io/support-team-sweden/
 - bli-medlem.html: En landningssida med information om hur man blir medlem.
 - kaffe.html: Sida relaterad till "bjud på en kaffe"-insamlingen.
 #### Instagram-mallar
