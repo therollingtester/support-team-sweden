@@ -161,14 +161,16 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            background: #fff; /* Ändrad bakgrund */
+            border: 2px solid #000; /* Tillagd svart ram */
             padding: 2px;
+            box-sizing: border-box;
         }
         .profile-pic img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 2px solid #fff;
+            /* T bort den inre vita ramen */
         }
         .profile-name {
             font-weight: 600;
@@ -488,9 +490,12 @@
             margin-bottom: 2em;
         }
         .swish-link-sticker {
-            display: inline-block;
-            background: #fff;
-            color: #000;
+            display: inline-flex; /* Ändrad för att justera innehåll */
+            align-items: center; /* Centrerar ikon och text vertikalt */
+            justify-content: center; /* Centrerar innehållet horisontellt */
+            gap: 12px; /* Avstånd mellan ikon och text */
+            background: #663399; /* Ändrad till Swish-lila */
+            color: #fff;
             padding: 14px 22px;
             border-radius: 16px;
             text-align: center;
@@ -498,31 +503,21 @@
             cursor: pointer;
             transition: transform 0.2s ease;
             text-decoration: none;
+            border: 2px solid rgba(255,255,255,0.5);
         }
         .swish-link-sticker:hover {
             transform: scale(1.05);
         }
-        .swish-link-sticker .icon-and-domain {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 6px;
-        }
-        .swish-link-sticker img {
-            width: 24px;
-            height: auto;
-        }
-        .swish-link-sticker .domain {
-            font-size: 12px;
-            font-weight: 600;
-            color: #555;
-            text-transform: uppercase;
+        .swish-link-sticker .link-icon {
+            width: 20px; /* Justerad storlek */
+            height: 20px;
+            stroke-width: 2.5; /* Lite tunnare linjer */
         }
         .swish-link-sticker .cta-text {
             font-size: clamp(1rem, 5vw, 1.3rem);
             font-weight: 700;
-            color: #663399;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
         .story-footer {
             height: 50px; /* Placeholder for message bar */
@@ -674,10 +669,7 @@
                             <p class="story-text">Varje bidrag, stort som smått, tar oss närmare drömmen. Bjud på en kaffe eller säkra en signerad landslagströja!</p>
                             
                             <a href="swish://payment?number=1233920618" class="swish-link-sticker">
-                                <div class="icon-and-domain">
-                                    <img src="images/swish-logo.png" alt="Swish Logotyp">
-                                    <span class="domain">SWISH.SE</span>
-                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="link-icon"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
                                 <span class="cta-text">SWISHA DITT STÖD HÄR</span>
                             </a>
                         </div>
@@ -707,6 +699,11 @@
             const nextButton = document.querySelector('.nav-arrow.next');
             const totalSlides = document.querySelectorAll('.slide').length;
 
+            function updateArrowVisibility(activeIndex) {
+                prevButton.style.display = (activeIndex === 0) ? 'none' : 'block';
+                nextButton.style.display = (activeIndex === totalSlides - 1) ? 'none' : 'block';
+            }
+
             function updateNav(activeIndex) {
                  dots.forEach((dot, index) => {
                     dot.classList.toggle('active', index === activeIndex);
@@ -715,28 +712,19 @@
 
             nextButton.addEventListener('click', () => {
                 const slideWidth = slider.offsetWidth;
-                let currentSlide = Math.round(slider.scrollLeft / slideWidth);
-                if (currentSlide === totalSlides - 1) {
-                    slider.scrollTo({ left: 0, behavior: 'smooth'});
-                } else {
-                    slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
-                }
+                slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
             });
 
             prevButton.addEventListener('click', () => {
                 const slideWidth = slider.offsetWidth;
-                 let currentSlide = Math.round(slider.scrollLeft / slideWidth);
-                if (currentSlide === 0) {
-                     slider.scrollTo({ left: slideWidth * (totalSlides - 1), behavior: 'smooth'});
-                } else {
-                    slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
-                }
+                slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
             });
 
             slider.addEventListener('scroll', () => {
                 const slideWidth = slider.offsetWidth;
                 const activeIndex = Math.round(slider.scrollLeft / slideWidth);
                 updateNav(activeIndex);
+                updateArrowVisibility(activeIndex);
             });
             
             dots.forEach((dot, index) => {
@@ -751,12 +739,15 @@
 
             const likeElements = document.querySelectorAll('.likes');
             likeElements.forEach(el => {
+                // Find the specific name to keep it
+                const nameElement = el.querySelector('b:first-of-type');
+                const originalName = nameElement ? nameElement.textContent : '';
+
                 const randomNumber = Math.floor(Math.random() * (9500)) + 500;
                 const formattedNumber = randomNumber.toLocaleString('sv-SE');
-                const numberElement = el.querySelector('b:last-of-type');
-                if(numberElement) {
-                    numberElement.textContent = `${formattedNumber} andra`;
-                }
+                
+                // Reconstruct the HTML string
+                el.innerHTML = `Gillas av <b>${originalName}</b> och <b>${formattedNumber} andra</b>`;
             });
 
             const captionContainer = document.getElementById('caption-container');
@@ -772,11 +763,12 @@
                     expandBtn.innerHTML = isCollapsed ? '... <span>mer</span>' : '<span>mindre</span>';
                 });
             }
+
+            // Set initial arrow state
+            updateArrowVisibility(0);
         });
     </script>
 </body>
 </html>
-
-
 
 
