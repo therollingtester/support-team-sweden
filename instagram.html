@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone Wireframe Slider</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cup-base-size: clamp(60px, 12vw, 80px);
+            --jersey-base-size: clamp(100px, 18vw, 120px);
+        }
+
+        /* --- ALLMÄN LAYOUT & SLIDER-STRUKTUR --- */
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f2f5;
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .mobile-frame {
+            width: 100%;
+            max-width: 420px;
+            aspect-ratio: 9 / 19.5;
+            background: #111;
+            border-radius: 55px;
+            padding: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 2px rgba(255,255,255,0.2);
+            display: flex;
+        }
+
+        .slider-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none; /* Dölj scrollbar */
+            scrollbar-width: none;  /* Dölj scrollbar */
+            height: 100%;
+            width: 100%;
+            border-radius: 40px;
+        }
+        .slider-container::-webkit-scrollbar {
+            display: none; /* Dölj scrollbar */
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .instagram-ui {
+            background: #FFF;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            color: #262626;
+        }
+
+        .scroll-content {
+            overflow-y: auto;
+            flex-grow: 1;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scroll-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slider-nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .nav-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #ccc;
+            border-radius: 50%;
+            margin: 0 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .nav-dot.active {
+            background-color: #006aa7;
+            transform: scale(1.2);
+        }
+
+        /* --- GEMENSAMMA INSTAGRAM-STILAR --- */
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            flex-shrink: 0;
+            background: #fff;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        .profile-pic {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            padding: 2px;
+        }
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+        .profile-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-left: 12px;
+        }
+        .options-icon { margin-left: auto; }
+
+        .post-content {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(20px, 8%, 40px);
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+         .post-content h1 {
+            line-height: 1.15;
+            margin: 0 0 0.5em 0;
+            color: #FFCD00;
+            font-weight: 900;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+            letter-spacing: -1px;
+        }
+
+        .post-actions {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            flex-shrink: 0;
+        }
+        .post-actions svg {
+            margin-right: 16px;
+            cursor: pointer;
+        }
+        .bookmark-icon { margin-left: auto; margin-right: 0; }
+        
+        .post-info {
+            padding: 0 16px 16px 16px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .likes { font-weight: 600; margin-bottom: 8px; }
+        .caption .username { font-weight: 600; }
+        .caption .hashtag { color: #00376b; cursor: pointer; }
+        .view-comments { color: #8e8e8e; font-size: 14px; margin-top: 8px; cursor: pointer; }
+
+        /* --- SLIDE 1: KAFFE-KAMPANJ --- */
+        #slide-1 .post-content h1 {
+            font-size: clamp(1.8rem, 8vw, 2.5rem);
+        }
+        #slide-1 .hero-bg {
+            background-image: linear-gradient(rgba(0, 56, 107, 0.8), rgba(0, 56, 107, 0.8)), url('images/actionbild.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .coffee-cup-container { margin-bottom: 1em; }
+        .coffee-cup {
+            position: relative;
+            width: var(--cup-base-size);
+            height: calc(var(--cup-base-size) * 0.95);
+            background: linear-gradient(to right, #f9f9f9, #d9d9d9);
+            border-bottom-left-radius: 45%;
+            border-bottom-right-radius: 45%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .cup-handle {
+            position: absolute;
+            right: calc(var(--cup-base-size) * -0.375);
+            top: calc(var(--cup-base-size) * 0.125);
+            width: calc(var(--cup-base-size) * 0.44);
+            height: calc(var(--cup-base-size) * 0.56);
+            border: calc(var(--cup-base-size) * 0.1) solid #d9d9d9;
+            border-left-color: transparent; border-radius: 50%;
+            transform: rotate(15deg);
+        }
+        .coffee-cup::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px;
+            height: 8px;
+            background: linear-gradient(to right, #FFCD00, #e6b800);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .steam-container {
+            position: absolute;
+            bottom: 90%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: calc(var(--cup-base-size) * 0.8);
+            filter: blur(calc(var(--cup-base-size) * 0.03));
+            z-index: 0;
+        }
+        .steam-wisp {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: calc(var(--cup-base-size) * 0.4);
+            height: calc(var(--cup-base-size) * 0.5);
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            opacity: 0;
+            animation: steamRise 6s infinite ease-out;
+        }
+        .steam-wisp:nth-child(1) { left: 45%; animation-delay: 0s; animation-duration: 5s; }
+        .steam-wisp:nth-child(2) { left: 60%; animation-delay: 2s; animation-duration: 6s; }
+        .steam-wisp:nth-child(3) { left: 30%; animation-delay: 3.5s; animation-duration: 5.5s; }
+        @keyframes steamRise {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translateY(calc(var(--cup-base-size) * -1.2)) scale(1.5); opacity: 0; }
+        }
+        .donation-suggestion {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 999px;
+            padding: 8px 18px;
+            font-size: clamp(0.8rem, 3.5vw, 1rem);
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        .donation-suggestion code, .swish-message-prompt code {
+            background-color: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .swish-box {
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #00386B;
+            padding: 10px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            max-width: 90%;
+        }
+        .swish-text-container { text-align: left; }
+        .swish-title { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .swish-number { font-size: clamp(1.2rem, 5vw, 1.6rem); font-family: 'Courier New', Courier, monospace; font-weight: 700; letter-spacing: 1px; color: #663399; white-space: nowrap; }
+        .swish-icon { width: 32px; height: auto; flex-shrink: 0; }
+        .swish-message-prompt {
+            background-color: #eaf3ff;
+            border-left: 4px solid #006aa7;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+         .swish-message-prompt code {
+            background-color: #d1e5f8;
+            font-weight: bold;
+        }
+        
+        #slide-1 .post-actions, #slide-1 .post-info {
+            background-color: #fff;
+        }
+
+        /* --- SLIDE 2: TRÖJ-KAMPANJ --- */
+        #slide-2 .post-content h1 {
+            font-size: clamp(1.6rem, 7vw, 2.2rem);
+        }
+        #slide-2 .hero-bg {
+             background-image: linear-gradient(rgba(0, 56, 107, 0.7), rgba(0, 56, 107, 0.7)), url('images/troja.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .jersey-container { margin-bottom: 0.8em; perspective: 600px; }
+        .jersey-icon {
+            width: var(--jersey-base-size);
+            height: calc(var(--jersey-base-size) * 1.05);
+            background: #006aa7;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease-out;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 35%, 80% 45%, 80% 100%, 20% 100%, 20% 45%, 0% 35%);
+            animation: float 5s ease-in-out infinite;
+        }
+        .jersey-collar, .player-number, .shine-overlay { position: absolute; }
+        .jersey-collar {
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 34%; height: 12%;
+            border: calc(var(--jersey-base-size) * 0.04) solid #005a91;
+            border-top-color: transparent; border-radius: 50%;
+        }
+        .player-number {
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) skewX(-8deg);
+            font-size: calc(var(--jersey-base-size) * 0.35);
+            font-weight: 900;
+            color: #FFCD00;
+            animation: number-glow 3s ease-in-out infinite;
+        }
+        .shine-overlay {
+            inset: -5px;
+            background: linear-gradient(100deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 80%);
+            transform: translateX(-101%);
+            animation: shine 4.5s infinite;
+            animation-delay: 1.5s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateX(5deg); }
+            50% { transform: translateY(-10px) rotateX(-5deg) scale(1.02); }
+        }
+        @keyframes shine {
+            0% { transform: translateX(-101%); }
+            20% { transform: translateX(101%); }
+            100% { transform: translateX(101%); }
+        }
+        @keyframes number-glow {
+            0%, 100% { text-shadow: 0 0 5px rgba(255, 205, 0, 0.3); }
+            50% { text-shadow: 0 0 15px rgba(255, 205, 0, 0.8); }
+        }
+        .price-tag {
+            font-size: clamp(1.5rem, 6vw, 2rem);
+            font-weight: 900;
+            color: #fff;
+            background: #006aa7;
+            padding: 5px 20px;
+            border-radius: 8px;
+            margin-bottom: 1em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        .payment-instructions {
+            background-color: rgba(255, 255, 255, 0.98);
+            color: #333;
+            padding: 12px 16px;
+            border-radius: 16px;
+            width: 95%;
+            max-width: 320px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        .payment-method { display: flex; align-items: center; gap: 12px; }
+        .payment-logo { width: 40px; height: 40px; flex-shrink: 0; object-fit: contain; }
+        .payment-details { display: flex; flex-direction: column; text-align: left; }
+        .payment-title { font-size: 0.8em; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
+        .payment-number { font-family: 'Courier New', Courier, monospace; font-size: 1.2em; font-weight: 700; color: #663399; }
+        .payment-instructions .divider { margin: 8px 0; border-top: 1px solid #e0e0e0; }
+        .payment-message { text-align: center; font-size: 0.9em; color: #333; margin-top: 8px; }
+        .payment-message strong { background: #e7e7e7; padding: 3px 8px; border-radius: 6px; color: #006aa7; font-weight: 700; }
+        
+        #slide-2 .post-info { text-align: left; }
+        #slide-2 .caption { position: relative; }
+        #slide-2 .caption.collapsed .caption-text {
+            max-height: 4.2em; /* Ca 3 rader */
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        #slide-2 .expand-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: none; /* Dold som standard */
+            font-size: 14px;
+        }
+        #slide-2 .expand-btn span { color: #8e8e8e; }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-frame">
+        <div class="slider-container">
+
+            <!-- ======================= SLIDE 1: KAFFE ======================= -->
+            <div class="slide" id="slide-1">
+                <div class="instagram-ui">
+                    <!-- Denna vy har ingen egen scroll, allt är synligt direkt -->
+                    <header class="post-header">
+                        <div class="profile-pic"><img src="https://placehold.co/64x64/006aa7/fecc00?text=S" alt="Profilbild"></div>
+                        <span class="profile-name">svenskrullstolsinnebandy</span>
+                        <svg class="options-icon" aria-label="Fler alternativ" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+                    </header>
+
+                    <div class="post-content hero-bg">
+                        <div class="coffee-cup-container">
+                            <div class="coffee-cup">
+                                <div class="cup-handle"></div>
+                                <div class="steam-container">
+                                    <span class="steam-wisp"></span><span class="steam-wisp"></span><span class="steam-wisp"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h1>Bjud Rullstols&shy;innebandy&shy;landslaget på en Kaffe</h1>
+                        <div class="donation-suggestion">
+                            <strong>50 kr</strong> med meddelandet <code>KAFFE</code>
+                        </div>
+                        <div class="swish-box">
+                            <img class="swish-icon" src="images/swish-logo.png" alt="Swish Logotyp">
+                            <div class="swish-text-container">
+                                <div class="swish-title">Swisha till</div>
+                                <div class="swish-number">123 392 0618</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-actions">
+                        <svg aria-label="Gilla" color="#262626" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        <svg aria-label="Kommentera" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        <svg aria-label="Dela inlägg" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                        <svg class="bookmark-icon" aria-label="Spara" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                    </div>
+
+                    <div class="post-info">
+                        <div class="likes">Gillas av <b>iff_floorball</b> och <b>1,234 andra</b></div>
+                        <div class="caption">
+                            <span class="username">svenskrullstolsinnebandy</span>
+                            Vår resa mot Världsmästerskapen står på spel, och vi behöver er i laget! 🇸🇪<br><br>
+                            Precis som förra gången kör vi en enkel insamling: Bjud oss på en fiktiv kopp kaffe! För dig är det en liten gest, men för oss blir varje "kaffe" till en flygbiljett, en hotellnatt eller en anmälningsavgift. Det är vår chans att få dra på oss landslagströjan och representera Sverige! 💙💛<br><br>
+                            <div class="swish-message-prompt">
+                                <b>Viktigt!</b> För att din gåva ska gå direkt till vår VM-resa, märk din Swish med <code>KAFFE</code> ☕️ Tack för ditt stöd!
+                            </div>
+                            Swisha ditt stöd – varje krona tar oss närmare drömmen!<br>
+                            <span class="hashtag">#rullstolsinnebandy</span> <span class="hashtag">#sverige</span> <span class="hashtag">#tillsammans</span>
+                        </div>
+                        <div class="view-comments">Visa alla 42 kommentarer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================= SLIDE 2: TRÖJA ======================= -->
+            <div class="slide" id="slide-2">
+                 <div class="instagram-ui">
+                    <div class="scroll-content">
+                        <header class="post-header">
+                            <div class="profile-pic"><img src="https://placehold.co/64x64/006aa7/fecc00?text=S" alt="Profilbild"></div>
+                            <span class="profile-name">svenskrullstolsinnebandy</span>
+                            <svg class="options-icon" aria-label="Fler alternativ" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+                        </header>
+
+                        <div class="post-content hero-bg">
+                            <div class="jersey-container">
+                                <div class="jersey-icon">
+                                    <div class="jersey-collar"></div>
+                                    <div class="player-number">25</div>
+                                    <div class="shine-overlay"></div>
+                                </div>
+                            </div>
+                            <h1>Säkra din signerade landslagströja!</h1>
+                            <div class="price-tag">500 kr</div>
+                            <div class="payment-instructions">
+                                <div class="payment-method">
+                                    <img src="images/swish-logo.png" alt="Swish Logotyp" class="payment-logo">
+                                    <div class="payment-details">
+                                        <span class="payment-title">Swisha till</span>
+                                        <span class="payment-number">123 392 0618</span>
+                                    </div>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="payment-method">
+                                    <img src="images/bg-logo.jpg" alt="Bankgiro Logotyp" class="payment-logo">
+                                    <div class="payment-details">
+                                        <span class="payment-title">Eller Bankgiro</span>
+                                        <span class="payment-number">656-3563</span>
+                                    </div>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="payment-message">Märk med: <strong>Landslagströja + telnr</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="post-actions">
+                             <svg aria-label="Gilla" color="#262626" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            <svg aria-label="Kommentera" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                            <svg aria-label="Dela inlägg" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                            <svg class="bookmark-icon" aria-label="Spara" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                        </div>
+                        <div class="post-info">
+                            <div class="likes">Gillas av <b>iffwfc</b> och <b>1,234 andra</b></div>
+                            <div class="caption" id="caption-container">
+                                <div class="caption-text" id="caption-text">
+                                    <span class="username">svenskrullstolsinnebandy</span>
+                                    Nu har du chansen! Stötta vår resa till VM och få ett unikt minne för livet. Vi säljer nu ett begränsat antal matchtröjor, signerade av hela landslaget! ✍️🇸🇪<br><br>
+                                    Varje såld tröja är ett stort steg närmare att finansiera vårt deltagande i Världsmästerskapen. För <b>500 kr</b> blir tröjan din.<br><br>
+                                    <b>Så här gör du:</b><br>
+                                    Betala via Swish eller Bankgiro. Märk betalningen med <code>"Landslagströja"</code> följt av <code>ditt telefonnummer</code>, så kontaktar vi dig för att arrangera leverans. Tack för att du är med i laget! 💙💛<br><br>
+                                    <span class="hashtag">#rullstolsinnebandy</span> <span class="hashtag">#landslagströja</span> <span class="hashtag">#hejasverige</span>
+                                </div>
+                                <button class="expand-btn" id="expand-btn">... <span>mer</span></button>
+                            </div>
+                            <div class="view-comments">Visa alla 8 kommentarer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="slider-nav">
+        <span class="nav-dot active"></span>
+        <span class="nav-dot"></span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- LOGIK FÖR SLIDER-NAVIGERING ---
+            const slider = document.querySelector('.slider-container');
+            const dots = document.querySelectorAll('.nav-dot');
+
+            slider.addEventListener('scroll', () => {
+                const slideWidth = slider.offsetWidth;
+                const activeIndex = Math.round(slider.scrollLeft / slideWidth);
+
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === activeIndex);
+                });
+            });
+
+            // --- LOGIK FÖR "LÄS MER"-KNAPPEN PÅ SLIDE 2 ---
+            const captionContainer = document.getElementById('caption-container');
+            const captionText = document.getElementById('caption-text');
+            const expandBtn = document.getElementById('expand-btn');
+            
+            // Kontrollera om texten är längre än den synliga ytan
+            // Använder try-catch för att inte krascha om elementen inte finns på en slide
+            try {
+                if (captionText.scrollHeight > captionText.clientHeight) {
+                    captionContainer.classList.add('collapsed');
+                    expandBtn.style.display = 'inline';
+                }
+
+                expandBtn.addEventListener('click', function() {
+                    const isCollapsed = captionContainer.classList.toggle('collapsed');
+                    expandBtn.innerHTML = isCollapsed ? '... <span>mer</span>' : '<span>mindre</span>';
+                });
+            } catch (e) {
+                // Elementen finns inte på den här sliden, inget att göra.
+            }
+        });
+    </script>
+</body>
+</html>
+
+
