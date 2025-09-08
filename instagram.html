@@ -27,6 +27,12 @@
             box-sizing: border-box;
         }
 
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Mer plats för pilarna */
+        }
+
         .mobile-frame {
             width: 100%;
             max-width: 420px;
@@ -36,6 +42,7 @@
             padding: 12px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 2px rgba(255,255,255,0.2);
             display: flex;
+            margin: 0 auto; /* Centrera ramen i wrappern */
         }
 
         .slider-container {
@@ -67,6 +74,7 @@
             display: flex;
             flex-direction: column;
             color: #262626;
+            position: relative;
         }
 
         .scroll-content {
@@ -90,11 +98,54 @@
             background-color: #ccc;
             border-radius: 50%;
             margin: 0 5px;
+            cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .nav-dot.active {
             background-color: #006aa7;
             transform: scale(1.2);
+        }
+        
+        /* --- NAVIGERINGSPILAR --- */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 44px;
+            color: #333;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease, opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none; /* Klickbar endast när synlig */
+            padding-bottom: 4px;
+            box-sizing: border-box;
+        }
+
+        .slider-wrapper:hover .nav-arrow {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .nav-arrow:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-arrow.prev { left: 0; }
+        .nav-arrow.next { right: 0; }
+        
+        @media (hover: none) and (pointer: coarse) {
+            .nav-arrow {
+                display: none;
+            }
         }
 
         /* --- GEMENSAMMA INSTAGRAM-STILAR --- */
@@ -171,15 +222,20 @@
         .caption .hashtag { color: #00376b; cursor: pointer; }
         .view-comments { color: #8e8e8e; font-size: 14px; margin-top: 8px; cursor: pointer; }
 
-        /* --- SLIDE 1: KAFFE-KAMPANJ --- */
-        #slide-1 .post-content h1 {
-            font-size: clamp(1.8rem, 8vw, 2.5rem);
-        }
-        #slide-1 .hero-bg {
-            background-image: linear-gradient(rgba(0, 56, 107, 0.8), rgba(0, 56, 107, 0.8)), url('images/actionbild.jpg');
+        /* --- SLIDE 1 & 2 SPECIFIKT --- */
+        #slide-1 .hero-bg, #slide-2 .hero-bg {
             background-size: cover;
             background-position: center;
         }
+        #slide-1 .hero-bg {
+            background-image: linear-gradient(rgba(0, 56, 107, 0.8), rgba(0, 56, 107, 0.8)), url('images/actionbild.jpg');
+        }
+        #slide-2 .hero-bg {
+            background-image: linear-gradient(rgba(0, 56, 107, 0.7), rgba(0, 56, 107, 0.7)), url('images/troja.jpg');
+        }
+        #slide-1 .post-content h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+        #slide-2 .post-content h1 { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+        
         .coffee-cup-container { margin-bottom: 1em; }
         .coffee-cup {
             position: relative;
@@ -283,20 +339,8 @@
             background-color: #d1e5f8;
             font-weight: bold;
         }
+        #slide-1 .post-actions, #slide-1 .post-info { background-color: #fff; }
         
-        #slide-1 .post-actions, #slide-1 .post-info {
-            background-color: #fff;
-        }
-
-        /* --- SLIDE 2: TRÖJ-KAMPANJ --- */
-        #slide-2 .post-content h1 {
-            font-size: clamp(1.6rem, 7vw, 2.2rem);
-        }
-        #slide-2 .hero-bg {
-             background-image: linear-gradient(rgba(0, 56, 107, 0.7), rgba(0, 56, 107, 0.7)), url('images/troja.jpg');
-            background-size: cover;
-            background-position: center;
-        }
         .jersey-container { margin-bottom: 0.8em; perspective: 600px; }
         .jersey-icon {
             width: var(--jersey-base-size);
@@ -371,11 +415,10 @@
         .payment-instructions .divider { margin: 8px 0; border-top: 1px solid #e0e0e0; }
         .payment-message { text-align: center; font-size: 0.9em; color: #333; margin-top: 8px; }
         .payment-message strong { background: #e7e7e7; padding: 3px 8px; border-radius: 6px; color: #006aa7; font-weight: 700; }
-        
         #slide-2 .post-info { text-align: left; }
         #slide-2 .caption { position: relative; }
         #slide-2 .caption.collapsed .caption-text {
-            max-height: 4.2em; /* Ca 3 rader */
+            max-height: 4.2em;
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 3;
@@ -386,185 +429,354 @@
             border: none;
             cursor: pointer;
             padding: 0;
-            display: none; /* Dold som standard */
+            display: none;
             font-size: 14px;
         }
         #slide-2 .expand-btn span { color: #8e8e8e; }
+
+        /* --- NYTT: SLIDE 3 - INSTAGRAM STORY --- */
+        #slide-3 .instagram-ui {
+            background-image: linear-gradient(rgba(0, 40, 75, 0.5), rgba(0, 20, 40, 0.7)), url('images/story-view.JPG');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: 16px;
+            box-sizing: border-box;
+            justify-content: space-between;
+        }
+        .story-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .story-header .profile-name {
+            color: #fff;
+        }
+        .story-progress-bar {
+            width: 100%;
+            height: 2px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 0;
+            right: 0;
+            padding: 0 8px;
+            box-sizing: border-box;
+        }
+        .story-progress-bar div {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 2px;
+        }
+        .story-content {
+            text-align: center;
+            padding: 20px;
+        }
+        .story-content h2 {
+            font-size: clamp(1.8rem, 9vw, 2.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 0 0 0.5em 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+        }
+        .story-text {
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
+            line-height: 1.5;
+            margin-bottom: 2em;
+        }
+        .swish-link-sticker {
+            display: inline-block;
+            background: #fff;
+            color: #000;
+            padding: 14px 22px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            text-decoration: none;
+        }
+        .swish-link-sticker:hover {
+            transform: scale(1.05);
+        }
+        .swish-link-sticker .icon-and-domain {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .swish-link-sticker img {
+            width: 24px;
+            height: auto;
+        }
+        .swish-link-sticker .domain {
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            text-transform: uppercase;
+        }
+        .swish-link-sticker .cta-text {
+            font-size: clamp(1rem, 5vw, 1.3rem);
+            font-weight: 700;
+            color: #663399;
+        }
+        .story-footer {
+            height: 50px; /* Placeholder for message bar */
+            flex-shrink: 0;
+        }
     </style>
 </head>
 <body>
 
-    <div class="mobile-frame">
-        <div class="slider-container">
+    <div class="slider-wrapper">
+        <button class="nav-arrow prev" aria-label="Föregående bild">&lsaquo;</button>
+        <div class="mobile-frame">
+            <div class="slider-container">
 
-            <!-- ======================= SLIDE 1: KAFFE ======================= -->
-            <div class="slide" id="slide-1">
-                <div class="instagram-ui">
-                    <!-- Denna vy har ingen egen scroll, allt är synligt direkt -->
-                    <header class="post-header">
-                        <div class="profile-pic"><img src="https://placehold.co/64x64/006aa7/fecc00?text=S" alt="Profilbild"></div>
-                        <span class="profile-name">svenskrullstolsinnebandy</span>
-                        <svg class="options-icon" aria-label="Fler alternativ" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
-                    </header>
+                <!-- ======================= SLIDE 1: KAFFE (ÅTERSTÄLLD) ======================= -->
+                <div class="slide" id="slide-1">
+                    <div class="instagram-ui">
+                        <div class="scroll-content">
+                            <header class="post-header">
+                                <div class="profile-pic"><img src="images/svib-para-logo.png" alt="Profilbild"></div>
+                                <span class="profile-name">svenskrullstolsinnebandy</span>
+                                <svg class="options-icon" aria-label="Fler alternativ" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+                            </header>
 
-                    <div class="post-content hero-bg">
-                        <div class="coffee-cup-container">
-                            <div class="coffee-cup">
-                                <div class="cup-handle"></div>
-                                <div class="steam-container">
-                                    <span class="steam-wisp"></span><span class="steam-wisp"></span><span class="steam-wisp"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <h1>Bjud Rullstols&shy;innebandy&shy;landslaget på en Kaffe</h1>
-                        <div class="donation-suggestion">
-                            <strong>50 kr</strong> med meddelandet <code>KAFFE</code>
-                        </div>
-                        <div class="swish-box">
-                            <img class="swish-icon" src="images/swish-logo.png" alt="Swish Logotyp">
-                            <div class="swish-text-container">
-                                <div class="swish-title">Swisha till</div>
-                                <div class="swish-number">123 392 0618</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="post-actions">
-                        <svg aria-label="Gilla" color="#262626" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                        <svg aria-label="Kommentera" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-                        <svg aria-label="Dela inlägg" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
-                        <svg class="bookmark-icon" aria-label="Spara" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
-                    </div>
-
-                    <div class="post-info">
-                        <div class="likes">Gillas av <b>iff_floorball</b> och <b>1,234 andra</b></div>
-                        <div class="caption">
-                            <span class="username">svenskrullstolsinnebandy</span>
-                            Vår resa mot Världsmästerskapen står på spel, och vi behöver er i laget! 🇸🇪<br><br>
-                            Precis som förra gången kör vi en enkel insamling: Bjud oss på en fiktiv kopp kaffe! För dig är det en liten gest, men för oss blir varje "kaffe" till en flygbiljett, en hotellnatt eller en anmälningsavgift. Det är vår chans att få dra på oss landslagströjan och representera Sverige! 💙💛<br><br>
-                            <div class="swish-message-prompt">
-                                <b>Viktigt!</b> För att din gåva ska gå direkt till vår VM-resa, märk din Swish med <code>KAFFE</code> ☕️ Tack för ditt stöd!
-                            </div>
-                            Swisha ditt stöd – varje krona tar oss närmare drömmen!<br>
-                            <span class="hashtag">#rullstolsinnebandy</span> <span class="hashtag">#sverige</span> <span class="hashtag">#tillsammans</span>
-                        </div>
-                        <div class="view-comments">Visa alla 42 kommentarer</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ======================= SLIDE 2: TRÖJA ======================= -->
-            <div class="slide" id="slide-2">
-                 <div class="instagram-ui">
-                    <div class="scroll-content">
-                        <header class="post-header">
-                            <div class="profile-pic"><img src="https://placehold.co/64x64/006aa7/fecc00?text=S" alt="Profilbild"></div>
-                            <span class="profile-name">svenskrullstolsinnebandy</span>
-                            <svg class="options-icon" aria-label="Fler alternativ" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
-                        </header>
-
-                        <div class="post-content hero-bg">
-                            <div class="jersey-container">
-                                <div class="jersey-icon">
-                                    <div class="jersey-collar"></div>
-                                    <div class="player-number">25</div>
-                                    <div class="shine-overlay"></div>
-                                </div>
-                            </div>
-                            <h1>Säkra din signerade landslagströja!</h1>
-                            <div class="price-tag">500 kr</div>
-                            <div class="payment-instructions">
-                                <div class="payment-method">
-                                    <img src="images/swish-logo.png" alt="Swish Logotyp" class="payment-logo">
-                                    <div class="payment-details">
-                                        <span class="payment-title">Swisha till</span>
-                                        <span class="payment-number">123 392 0618</span>
+                            <div class="post-content hero-bg">
+                                <div class="coffee-cup-container">
+                                    <div class="coffee-cup">
+                                        <div class="cup-handle"></div>
+                                        <div class="steam-container">
+                                            <span class="steam-wisp"></span><span class="steam-wisp"></span><span class="steam-wisp"></span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="divider"></div>
-                                <div class="payment-method">
-                                    <img src="images/bg-logo.jpg" alt="Bankgiro Logotyp" class="payment-logo">
-                                    <div class="payment-details">
-                                        <span class="payment-title">Eller Bankgiro</span>
-                                        <span class="payment-number">656-3563</span>
+                                <h1>Bjud Rullstols&shy;innebandy&shy;landslaget på en Kaffe</h1>
+                                <div class="donation-suggestion">
+                                    <strong>50 kr</strong> med meddelandet <code>KAFFE</code>
+                                </div>
+                                <div class="swish-box">
+                                    <img class="swish-icon" src="images/swish-logo.png" alt="Swish Logotyp">
+                                    <div class="swish-text-container">
+                                        <div class="swish-title">Swisha till</div>
+                                        <div class="swish-number">123 392 0618</div>
                                     </div>
                                 </div>
-                                <div class="divider"></div>
-                                <div class="payment-message">Märk med: <strong>Landslagströja + telnr</strong></div>
                             </div>
-                        </div>
 
-                        <div class="post-actions">
-                             <svg aria-label="Gilla" color="#262626" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                            <svg aria-label="Kommentera" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-                            <svg aria-label="Dela inlägg" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
-                            <svg class="bookmark-icon" aria-label="Spara" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
-                        </div>
-                        <div class="post-info">
-                            <div class="likes">Gillas av <b>iffwfc</b> och <b>1,234 andra</b></div>
-                            <div class="caption" id="caption-container">
-                                <div class="caption-text" id="caption-text">
+                            <div class="post-actions">
+                                <svg aria-label="Gilla" color="#262626" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <svg aria-label="Kommentera" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                <svg aria-label="Dela inlägg" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                                <svg class="bookmark-icon" aria-label="Spara" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                            </div>
+
+                            <div class="post-info">
+                                <div class="likes">Gillas av <b>iff_floorball</b> och <b>1,234 andra</b></div>
+                                <div class="caption">
                                     <span class="username">svenskrullstolsinnebandy</span>
-                                    Nu har du chansen! Stötta vår resa till VM och få ett unikt minne för livet. Vi säljer nu ett begränsat antal matchtröjor, signerade av hela landslaget! ✍️🇸🇪<br><br>
-                                    Varje såld tröja är ett stort steg närmare att finansiera vårt deltagande i Världsmästerskapen. För <b>500 kr</b> blir tröjan din.<br><br>
-                                    <b>Så här gör du:</b><br>
-                                    Betala via Swish eller Bankgiro. Märk betalningen med <code>"Landslagströja"</code> följt av <code>ditt telefonnummer</code>, så kontaktar vi dig för att arrangera leverans. Tack för att du är med i laget! 💙💛<br><br>
-                                    <span class="hashtag">#rullstolsinnebandy</span> <span class="hashtag">#landslagströja</span> <span class="hashtag">#hejasverige</span>
+                                    Vår resa mot Världsmästerskapen står på spel, och vi behöver er i laget! 🇸🇪<br><br>
+                                    Precis som förra gången kör vi en enkel insamling: Bjud oss på en fiktiv kopp kaffe! För dig är det en liten gest, men för oss blir varje "kaffe" till en flygbiljett, en hotellnatt eller en anmälningsavgift. Det är vår chans att få dra på oss landslagströjan och representera Sverige! 💙💛<br><br>
+                                    <div class="swish-message-prompt">
+                                        <b>Viktigt!</b> För att din gåva ska gå direkt till vår VM-resa, märk din Swish med <code>KAFFE</code> ☕️ Tack för ditt stöd!
+                                    </div>
+                                    Swisha ditt stöd – varje krona tar oss närmare drömmen!<br>
+                                    <span class="hashtag">#rullstolsinnebandy</span> <span class="hashtag">#sverige</span> <span class="hashtag">#tillsammans</span>
                                 </div>
-                                <button class="expand-btn" id="expand-btn">... <span>mer</span></button>
+                                <div class="view-comments">Visa alla 42 kommentarer</div>
                             </div>
-                            <div class="view-comments">Visa alla 8 kommentarer</div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <!-- ======================= SLIDE 2: TRÖJA (ÅTERSTÄLLD) ======================= -->
+                <div class="slide" id="slide-2">
+                     <div class="instagram-ui">
+                        <div class="scroll-content">
+                            <header class="post-header">
+                                <div class="profile-pic"><img src="images/svib-para-logo.png" alt="Profilbild"></div>
+                                <span class="profile-name">svenskrullstolsinnebandy</span>
+                                <svg class="options-icon" aria-label="Fler alternativ" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+                            </header>
+
+                            <div class="post-content hero-bg">
+                                <div class="jersey-container">
+                                    <div class="jersey-icon">
+                                        <div class="jersey-collar"></div>
+                                        <div class="player-number">25</div>
+                                        <div class="shine-overlay"></div>
+                                    </div>
+                                </div>
+                                <h1>Säkra din signerade landslagströja!</h1>
+                                <div class="price-tag">500 kr</div>
+                                <div class="payment-instructions">
+                                    <div class="payment-method">
+                                        <img src="images/swish-logo.png" alt="Swish Logotyp" class="payment-logo">
+                                        <div class="payment-details">
+                                            <span class="payment-title">Swisha till</span>
+                                            <span class="payment-number">123 392 0618</span>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="payment-method">
+                                        <img src="images/bg-logo.jpg" alt="Bankgiro Logotyp" class="payment-logo">
+                                        <div class="payment-details">
+                                            <span class="payment-title">Eller Bankgiro</span>
+                                            <span class="payment-number">656-3563</span>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="payment-message">Märk med: <strong>Landslagströja + telnr</strong></div>
+                                </div>
+                            </div>
+
+                            <div class="post-actions">
+                                 <svg aria-label="Gilla" color="#262626" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <svg aria-label="Kommentera" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                <svg aria-label="Dela inlägg" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                                <svg class="bookmark-icon" aria-label="Spara" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                            </div>
+                            <div class="post-info">
+                                <div class="likes">Gillas av <b>iffwfc</b> och <b>1,234 andra</b></div>
+                                <div class="caption" id="caption-container">
+                                    <div class="caption-text" id="caption-text">
+                                        <span class="username">svenskrullstolsinnebandy</span>
+                                        Nu har du chansen! Stötta vår resa till VM och få ett unikt minne för livet. Vi säljer nu ett begränsat antal matchtröjor, signerade av hela landslaget! ✍️🇸🇪<br><br>
+                                        Varje såld tröja är ett stort steg närmare att finansiera vårt deltagande i Världsmästerskapen. För <b>500 kr</b> blir tröjan din.<br><br>
+                                        <b>Så här gör du:</b><br>
+                                        Betala via Swish eller Bankgiro. Märk betalningen med <code>"Landslagströja"</code> följt av <code>ditt telefonnummer</code>, så kontaktar vi dig för att arrangera leverans. Tack för att du är med i laget! 💙💛<br><br>
+                                        <span class="hashtag">#rullstolsinnebandy</span> <span class="hashtag">#landslagströja</span> <span class="hashtag">#hejasverige</span>
+                                    </div>
+                                    <button class="expand-btn" id="expand-btn">... <span>mer</span></button>
+                                </div>
+                                <div class="view-comments">Visa alla 8 kommentarer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ======================= SLIDE 3: STORY (BEVARAD) ======================= -->
+                <div class="slide" id="slide-3">
+                     <div class="instagram-ui">
+                        <div class="story-progress-bar"><div></div></div>
+                        <header class="story-header">
+                            <div class="profile-pic"><img src="images/svib-para-logo.png" alt="Profilbild"></div>
+                            <span class="profile-name">svenskrullstolsinnebandy</span>
+                        </header>
+                        
+                        <div class="story-content">
+                            <h2>Stötta vår VM-resa!</h2>
+                            <p class="story-text">Varje bidrag, stort som smått, tar oss närmare drömmen. Bjud på en kaffe eller säkra en signerad landslagströja!</p>
+                            
+                            <a href="swish://payment?number=1233920618" class="swish-link-sticker">
+                                <div class="icon-and-domain">
+                                    <img src="images/swish-logo.png" alt="Swish Logotyp">
+                                    <span class="domain">SWISH.SE</span>
+                                </div>
+                                <span class="cta-text">SWISHA DITT STÖD HÄR</span>
+                            </a>
+                        </div>
+
+                        <div class="story-footer">
+                            <!-- Placeholder for message input -->
+                        </div>
+                     </div>
+                </div>
+
+            </div>
         </div>
+        <button class="nav-arrow next" aria-label="Nästa bild">&rsaquo;</button>
     </div>
 
     <div class="slider-nav">
         <span class="nav-dot active"></span>
         <span class="nav-dot"></span>
+        <span class="nav-dot"></span>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- LOGIK FÖR SLIDER-NAVIGERING ---
             const slider = document.querySelector('.slider-container');
             const dots = document.querySelectorAll('.nav-dot');
+            const prevButton = document.querySelector('.nav-arrow.prev');
+            const nextButton = document.querySelector('.nav-arrow.next');
+            const totalSlides = document.querySelectorAll('.slide').length;
+
+            function updateNav(activeIndex) {
+                 dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === activeIndex);
+                });
+            }
+
+            nextButton.addEventListener('click', () => {
+                const slideWidth = slider.offsetWidth;
+                let currentSlide = Math.round(slider.scrollLeft / slideWidth);
+                if (currentSlide === totalSlides - 1) {
+                    slider.scrollTo({ left: 0, behavior: 'smooth'});
+                } else {
+                    slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
+                }
+            });
+
+            prevButton.addEventListener('click', () => {
+                const slideWidth = slider.offsetWidth;
+                 let currentSlide = Math.round(slider.scrollLeft / slideWidth);
+                if (currentSlide === 0) {
+                     slider.scrollTo({ left: slideWidth * (totalSlides - 1), behavior: 'smooth'});
+                } else {
+                    slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+                }
+            });
 
             slider.addEventListener('scroll', () => {
                 const slideWidth = slider.offsetWidth;
                 const activeIndex = Math.round(slider.scrollLeft / slideWidth);
-
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === activeIndex);
+                updateNav(activeIndex);
+            });
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const slideWidth = slider.offsetWidth;
+                    slider.scrollTo({
+                        left: slideWidth * index,
+                        behavior: 'smooth'
+                    });
                 });
             });
 
-            // --- LOGIK FÖR "LÄS MER"-KNAPPEN PÅ SLIDE 2 ---
+            const likeElements = document.querySelectorAll('.likes');
+            likeElements.forEach(el => {
+                const randomNumber = Math.floor(Math.random() * (9500)) + 500;
+                const formattedNumber = randomNumber.toLocaleString('sv-SE');
+                const numberElement = el.querySelector('b:last-of-type');
+                if(numberElement) {
+                    numberElement.textContent = `${formattedNumber} andra`;
+                }
+            });
+
             const captionContainer = document.getElementById('caption-container');
-            const captionText = document.getElementById('caption-text');
-            const expandBtn = document.getElementById('expand-btn');
-            
-            // Kontrollera om texten är längre än den synliga ytan
-            // Använder try-catch för att inte krascha om elementen inte finns på en slide
-            try {
+            if (captionContainer) {
+                const captionText = document.getElementById('caption-text');
+                const expandBtn = document.getElementById('expand-btn');
                 if (captionText.scrollHeight > captionText.clientHeight) {
                     captionContainer.classList.add('collapsed');
                     expandBtn.style.display = 'inline';
                 }
-
                 expandBtn.addEventListener('click', function() {
                     const isCollapsed = captionContainer.classList.toggle('collapsed');
                     expandBtn.innerHTML = isCollapsed ? '... <span>mer</span>' : '<span>mindre</span>';
                 });
-            } catch (e) {
-                // Elementen finns inte på den här sliden, inget att göra.
             }
         });
     </script>
 </body>
 </html>
+
+
 
 
