@@ -38,6 +38,20 @@
             transform: translateY(0);
             opacity: 1;
         }
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #FFCD00;
+            box-shadow: 0 0 0 3px rgba(255, 205, 0, 0.3);
+        }
+        .submit-button {
+            transition: all 0.3s ease;
+        }
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 56, 107, 0.2);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -56,8 +70,9 @@
             </a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#om-oss" class="text-slate-600 hover:text-[#00386B] font-semibold transition-colors duration-300">Om Oss</a>
+                <a href="#spelare" class="text-slate-600 hover:text-[#00386B] font-semibold transition-colors duration-300">Laget</a>
                 <a href="#sponsorer" class="text-slate-600 hover:text-[#00386B] font-semibold transition-colors duration-300">För Företag</a>
-                <a href="#stotta-oss" class="text-slate-600 hover:text-[#00386B] font-semibold transition-colors duration-300">För Privatpersoner</a>
+                <a href="#stotta-oss" class="text-slate-600 hover:text-[#00386B] font-semibold transition-colors duration-300">Stötta Oss</a>
             </div>
             <a href="#stotta-oss" class="hidden md:inline-block bg-[#FFCD00] text-[#00386B] font-bold py-2 px-5 rounded-full hover:bg-yellow-400 transition-transform duration-300 hover:scale-105 shadow-sm">
                 Stötta Oss
@@ -70,8 +85,9 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
             <a href="#om-oss" class="block text-slate-600 hover:text-[#00386B] font-semibold py-2">Om Oss</a>
+            <a href="#spelare" class="block text-slate-600 hover:text-[#00386B] font-semibold py-2">Laget</a>
             <a href="#sponsorer" class="block text-slate-600 hover:text-[#00386B] font-semibold py-2">För Företag</a>
-            <a href="#stotta-oss" class="block text-slate-600 hover:text-[#00386B] font-semibold py-2">För Privatpersoner</a>
+            <a href="#stotta-oss" class="block text-slate-600 hover:text-[#00386B] font-semibold py-2">Stötta Oss</a>
             <a href="#stotta-oss" class="block bg-[#FFCD00] text-[#00386B] text-center font-bold mt-2 py-2 px-5 rounded-full hover:bg-yellow-400 transition-transform duration-300 hover:scale-105 shadow-sm">
                 Stötta Oss
             </a>
@@ -108,7 +124,7 @@
                 </div>
                 <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                      <div class="reveal">
-                        <!-- BILD-PLATSHÅLLARE: Byt ut 'images/lagbild.jpg' mot sökvägen till din lagbild. -->
+                        <!-- BILD: Byt ut mot sökvägen till din lagbild. -->
                         <img src="images/lagbild.jpg" alt="Svenska Rullstolsinnebandylandslaget i en huddle" class="rounded-lg shadow-2xl w-full">
                     </div>
                      <div class="text-left reveal" style="transition-delay: 200ms;">
@@ -131,27 +147,163 @@
                     </p>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
-                    <!-- BILD-PLATSHÅLLARE: Byt ut 'images/galleri-1.jpg' mot sökvägen till din första galleribild. -->
+                    <!-- BILDER: Byt ut mot dina galleribilder. -->
                     <img src="images/galleri-1.jpg" alt="Rullstolsinnebandyspelare i action" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 aspect-video object-cover">
-                    <!-- BILD-PLATSHÅLLARE: Byt ut 'images/galleri-2.jpg' mot sökvägen till din andra galleribild. -->
                     <img src="images/galleri-2.jpg" alt="Lagkamrater firar mål" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 aspect-video object-cover">
-                    <!-- BILD-PLATSHÅLLARE: Byt ut 'images/galleri-3.jpg' mot sökvägen till din tredje galleribild. -->
                     <img src="images/galleri-3.jpg" alt="Fokuserad spelare med klubba" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 aspect-video object-cover">
-                    <!-- BILD-PLATSHÅLLARE: Byt ut 'images/galleri-4.jpg' mot sökvägen till din fjärde galleribild. -->
                     <img src="images/galleri-4.jpg" alt="Lagfoto efter match" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 aspect-video object-cover">
                 </div>
             </div>
         </section>
 
+        <!-- YouTube Carousel Section -->
+        <section id="videogalleri" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-[#00386B] mb-12 section-title">Se Oss i Action</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-16">
+                        Inget beskriver sporten bättre än att se den live. Här är några klipp som visar farten, tekniken och lagandan.
+                    </p>
+                </div>
+                <div id="youtube-carousel" class="relative max-w-4xl mx-auto reveal">
+                    <div id="youtube-slides" class="flex transition-transform duration-500 ease-in-out">
+                        <!-- Slide 1 -->
+                        <div class="w-full flex-none p-2">
+                            <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl">
+                                <iframe class="w-full h-full" src="https://www.youtube.com/embed/L7FFGrGz0EE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="w-full flex-none p-2">
+                             <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl">
+                                <iframe class="w-full h-full" src="https://www.youtube.com/embed/kl_j7Yb3gfg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="w-full flex-none p-2">
+                            <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl">
+                                <iframe class="w-full h-full" src="https://www.youtube.com/embed/xFBDXER48Mo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <button id="youtube-prev" class="absolute top-1/2 left-0 md:-left-12 transform -translate-y-1/2 bg-white/70 text-[#00386B] rounded-full p-3 hover:bg-[#FFCD00] transition-all duration-300 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <button id="youtube-next" class="absolute top-1/2 right-0 md:-right-12 transform -translate-y-1/2 bg-white/70 text-[#00386B] rounded-full p-3 hover:bg-[#FFCD00] transition-all duration-300 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spelare Section -->
+        <section id="spelare" class="bg-slate-100 py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-[#00386B] mb-12 section-title">Möt Våra Kämpar</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-16">
+                        Det är individerna som skapar laget. Lär känna några av de drivna atleterna som stolt bär de svenska färgerna.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <!-- Player 1 -->
+                    <div class="reveal bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <img src="images/kalle-toft-portratt.jpg" alt="Porträtt av Kalle Toft" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-[#FFCD00] object-cover">
+                        <h3 class="text-2xl font-bold text-[#00386B]">Kalle Toft</h3>
+                        <p class="font-semibold text-[#006aa7] mb-3">Målvakt</p>
+                        <p class="text-slate-600">En sista utpost som inger lugn i hela laget. Kalles blixtsnabba reflexer och följsamhet gör målet till en mardröm för motståndarna.</p>
+                    </div>
+                    <!-- Player 2 -->
+                    <div class="reveal bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" style="transition-delay: 150ms;">
+                         <img src="images/roberth-isaksson-portratt.jpg" alt="Porträtt av Roberth Isaksson" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-[#FFCD00] object-cover">
+                        <h3 class="text-2xl font-bold text-[#00386B]">Roberth Isaksson</h3>
+                        <p class="font-semibold text-[#006aa7] mb-3">Forward</p>
+                        <p class="text-slate-600">En teknisk och snabb forward med näsa för mål. Roberth är en konstant fara i anfallszonen och tvekar aldrig att utmana sin försvarare.</p>
+                    </div>
+                    <!-- Player 3 -->
+                    <div class="reveal bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" style="transition-delay: 300ms;">
+                         <img src="images/victor-piccardo-portratt.jpg" alt="Porträtt av Victor Piccardo" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-[#FFCD00] object-cover">
+                        <h3 class="text-2xl font-bold text-[#00386B]">Victor Piccardo</h3>
+                        <p class="font-semibold text-[#006aa7] mb-3">Back</p>
+                        <p class="text-slate-600">En fysisk och smart back som läser spelet mästerligt. Victor är lika bra på att bryta passningar som att starta anfall med sitt förstapass.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Metrics Section -->
+        <section id="gemenskap" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-[#00386B] mb-12 section-title">Vår Gemenskap i Siffror</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-16">
+                        Vi är mer än bara ett lag – vi är en rörelse. Siffrorna är bara en del av historien, men de visar kraften i det stöd som bär oss framåt.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <!-- Metric 1 -->
+                    <div class="reveal bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-6xl font-black text-[#FFCD00] mb-3">1400+</div>
+                        <h3 class="text-xl font-bold text-[#00386B]">Följare & Supportrar</h3>
+                        <p class="text-slate-600 mt-2">En växande familj som hejar på oss i med- och motgång.</p>
+                    </div>
+                    <!-- Metric 2 -->
+                    <div class="reveal bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" style="transition-delay: 150ms;">
+                        <div class="text-6xl font-black text-[#FFCD00] mb-3">∞</div>
+                        <h3 class="text-xl font-bold text-[#00386B]">Kämparanda</h3>
+                        <p class="text-slate-600 mt-2">En ostoppbar vilja att övervinna hinder och nå toppen.</p>
+                    </div>
+                    <!-- Metric 3 -->
+                    <div class="reveal bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" style="transition-delay: 300ms;">
+                        <div class="text-6xl font-black text-[#FFCD00] mb-3">1</div>
+                        <h3 class="text-xl font-bold text-[#00386B]">Gemensam Dröm</h3>
+                        <p class="text-slate-600 mt-2">Att få representera Sverige och slåss om VM-guldet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Sponsorer Section -->
-        <section id="sponsorer" class="py-20 md:py-32 bg-slate-100">
+        <section id="sponsorer" class="bg-slate-100 py-20 md:py-32">
             <div class="container mx-auto px-6 text-center">
                  <div class="reveal">
                     <h2 class="relative text-3xl md:text-4xl font-extrabold text-[#00386B] mb-12 section-title">FÖR FÖRETAG – EN INVESTERING I STOLTHET</h2>
-                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-16">
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-12">
                         Att sponsra oss är mer än en logotyp. Det är ett partnerskap som visar att ert företag står för inkludering, mångfald och en orubblig tro på att inga hinder är för stora. Låt oss tillsammans skapa en vinnande historia!
                     </p>
                 </div>
+                
+                <!-- Sponsor Logo Wall -->
+                <div class="reveal mb-20">
+                    <h3 class="text-2xl font-bold text-[#00386B] mb-8">Våra Stolta Sponsorer</h3>
+                    <!-- Platina -->
+                    <div class="mb-8">
+                        <h4 class="text-lg font-semibold text-slate-500 uppercase tracking-widest mb-4">Platina</h4>
+                        <div class="flex justify-center items-center gap-8">
+                            <img src="images/sponsor-platina-placeholder.png" alt="Platina Sponsor Logotyp" class="h-16 opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                    </div>
+                    <!-- Guld -->
+                    <div class="mb-8">
+                        <h4 class="text-lg font-semibold text-slate-500 uppercase tracking-widest mb-4">Guld</h4>
+                        <div class="flex justify-center items-center flex-wrap gap-8">
+                            <img src="images/sponsor-guld-placeholder.png" alt="Guld Sponsor Logotyp" class="h-12 opacity-70 hover:opacity-100 transition-opacity">
+                            <img src="images/sponsor-guld-placeholder.png" alt="Guld Sponsor Logotyp" class="h-12 opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                    </div>
+                    <!-- Silver -->
+                    <div>
+                        <h4 class="text-lg font-semibold text-slate-500 uppercase tracking-widest mb-4">Silver & Brons</h4>
+                        <div class="flex justify-center items-center flex-wrap gap-8">
+                            <img src="images/sponsor-silver-placeholder.png" alt="Silver Sponsor Logotyp" class="h-10 opacity-70 hover:opacity-100 transition-opacity">
+                            <img src="images/sponsor-silver-placeholder.png" alt="Silver Sponsor Logotyp" class="h-10 opacity-70 hover:opacity-100 transition-opacity">
+                            <img src="images/sponsor-brons-placeholder.png" alt="Brons Sponsor Logotyp" class="h-10 opacity-70 hover:opacity-100 transition-opacity">
+                            <img src="images/sponsor-brons-placeholder.png" alt="Brons Sponsor Logotyp" class="h-10 opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <!-- Platina -->
                     <div class="reveal bg-white rounded-xl shadow-lg p-8 border-t-8 border-[#00386B] flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
@@ -199,51 +351,122 @@
             </div>
         </section>
 
-        <!-- Stötta Oss Section -->
-        <section id="stotta-oss" class="py-20 md:py-32">
-            <div class="container mx-auto px-6 text-center">
-                 <div class="reveal">
-                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-[#00386B] mb-12 section-title">FÖR DIG – BLI VÅR SJÄTTE SPELARE!</h2>
+        <!-- Stötta Oss & Bli Medlem Section -->
+        <section id="stotta-oss" class="py-20 md:py-32 bg-slate-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-[#00386B] mb-12 section-title">BLI VÅR SJÄTTE SPELARE!</h2>
                     <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-16">
-                        Varje krona räknas, varje hejarop stärker oss. Ditt bidrag, oavsett storlek, är en direktbiljett för en spelare att kunna följa med på resan och jaga sina drömmar. Du blir en del av laget och en avgörande kraft i vår jakt på medaljer. Tack!
+                        Ditt stöd är avgörande. Genom att bli medlem för 500 kr/år får du inte bara en exklusiv, signerad matchtröja – du blir en ovärderlig del av vår jakt på guldet. Välj hur du vill bidra nedan.
                     </p>
                 </div>
-                <div class="flex flex-wrap justify-center gap-8">
-                    <!-- Swish -->
-                    <div class="reveal bg-white rounded-xl shadow-xl p-8 md:p-10 w-full max-w-md border-b-8 border-purple-600">
-                        <h3 class="text-3xl font-bold text-[#00386B] mb-4">SWISHA DITT STÖD</h3>
-                        <p class="text-slate-600 mb-6">Öppna din Swish-app och skicka ditt bidrag. Enkelt, snabbt och ovärderligt för oss.</p>
-                        <div class="bg-slate-100 p-6 rounded-lg text-left">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="text-slate-500">Nummer</span>
-                                <span class="font-mono font-bold text-lg text-purple-700">123 90 90 90 9</span>
+
+                <!-- Medlemskap Formulär -->
+                <div class="reveal max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden border-t-8 border-[#FFCD00]">
+                    <div class="bg-[#00386B] text-white p-8 text-center">
+                        <h3 class="text-3xl sm:text-4xl font-black text-[#FFCD00]">BLI MEDLEM & STÖTTA LANDSLAGET!</h3>
+                        <p class="mt-2 text-slate-200">Bli en officiell supporter och hjälp oss på resan mot VM-guldet.</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="bg-slate-100 border-l-4 border-[#006aa7] p-6 rounded-lg mb-8">
+                            <h4 class="text-xl font-bold text-[#00386B] mb-2">Bli medlem för endast 500 kr per år!</h4>
+                            <p class="text-slate-700 mb-4">Som tack för ditt stöd får du en exklusiv, signerad landslagströja – direkt från våra spelare.</p>
+                            <ul class="list-disc list-inside space-y-2 text-slate-600">
+                                <li>Ge våra spelare <strong>lägre egenavgifter</strong>.</li>
+                                <li>Skapa bättre förutsättningar att <strong>prestera på internationell nivå</strong>.</li>
+                                <li><strong>Sprid sporten</strong> och gör den mer tillgänglig för fler.</li>
+                                <li>Bygg <strong>stolthet och gemenskap</strong> kring landslaget.</li>
+                            </ul>
+                        </div>
+
+                        <!-- OBS: Detta formulär skickar ingen data. Det måste kopplas till en backend-tjänst för att fungera. -->
+                        <form action="#" method="POST" class="space-y-6">
+                            <div>
+                                <label for="full_name" class="block text-sm font-bold text-slate-700">Fullständigt namn</label>
+                                <input type="text" name="full_name" id="full_name" required class="form-input mt-1 block w-full px-4 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50">
                             </div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="text-slate-500">Mottagare</span>
-                                <span class="font-semibold text-slate-700">Svenska Rullstolsinnebandy</span>
+                            <div>
+                                <label for="email" class="block text-sm font-bold text-slate-700">E-postadress</label>
+                                <input type="email" name="email" id="email" required class="form-input mt-1 block w-full px-4 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50">
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500">Meddelande</span>
-                                <span class="font-semibold text-slate-700">Go Sweden! 🇸🇪</span>
+                            <div>
+                                <label for="address" class="block text-sm font-bold text-slate-700">Leveransadress (för tröjan)</label>
+                                <textarea name="address" id="address" rows="3" required placeholder="Gatuadress, Postnummer, Ort" class="form-input mt-1 block w-full px-4 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50"></textarea>
+                            </div>
+                            <div class="bg-red-50 border border-red-200 p-4 rounded-lg">
+                                <h3 class="text-lg font-bold text-red-800 mb-2">Hantering av personuppgifter (GDPR)</h3>
+                                <p class="text-sm text-red-700 mb-4">
+                                    Genom att skicka in detta formulär godkänner du att vi lagrar dina personuppgifter. Vi behöver dessa för att kunna hantera ditt medlemskap och skicka din landslagströja.
+                                </p>
+                                <ul class="list-disc list-inside space-y-1 text-sm text-red-700">
+                                    <li><strong>Vilka uppgifter lagras?</strong> Ditt namn, din e-postadress och din postadress.</li>
+                                    <li><strong>Varför?</strong> För att kunna föra vårt medlemsregister och för att veta vart vi ska skicka din tröja.</li>
+                                    <li><strong>Hur länge?</strong> Uppgifterna sparas så länge du är medlem.</li>
+                                    <li><strong>Dina rättigheter:</strong> Du har rätt att när som helst begära ut, ändra eller radera dina uppgifter genom att kontakta oss.</li>
+                                </ul>
+                                <div class="mt-4 relative flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="gdpr_consent" name="gdpr_consent" type="checkbox" required class="h-4 w-4 text-[#00386B] border-slate-300 rounded focus:ring-[#FFCD00]">
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                        <label for="gdpr_consent" class="font-medium text-slate-800">Jag har läst och godkänner hanteringen av mina personuppgifter enligt ovan.</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="submit-button w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-lg text-lg font-bold text-[#00386B] bg-[#FFCD00] hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+                                    Bli medlem nu (500 kr)
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Andra sätt att stötta -->
+                <div class="text-center mt-24">
+                    <div class="reveal">
+                         <h3 class="text-2xl font-bold text-[#00386B] mb-4">Andra Sätt att Stötta</h3>
+                        <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-12">
+                            Föredrar du att ge ett engångsbidrag? Varje krona gör skillnad!
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-8">
+                        <!-- Swish -->
+                        <div class="reveal bg-white rounded-xl shadow-xl p-8 md:p-10 w-full max-w-md border-b-8 border-purple-600">
+                            <h3 class="text-3xl font-bold text-[#00386B] mb-4">SWISHA DITT STÖD</h3>
+                            <p class="text-slate-600 mb-6">Öppna din Swish-app och skicka ditt bidrag. Enkelt, snabbt och ovärderligt för oss.</p>
+                            <div class="bg-slate-100 p-6 rounded-lg text-left">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-slate-500">Nummer</span>
+                                    <span class="font-mono font-bold text-lg text-purple-700">123 90 90 90 9</span>
+                                </div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-slate-500">Mottagare</span>
+                                    <span class="font-semibold text-slate-700">Svenska Rullstolsinnebandy</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500">Meddelande</span>
+                                    <span class="font-semibold text-slate-700">Go Sweden! 🇸🇪</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                     <!-- Bankgiro -->
-                    <div class="reveal bg-white rounded-xl shadow-xl p-8 md:p-10 w-full max-w-md border-b-8 border-[#00386B]">
-                        <h3 class="text-3xl font-bold text-[#00386B] mb-4">BANKÖVERFÖRING</h3>
-                        <p class="text-slate-600 mb-6">För dig som föredrar en klassisk banköverföring.</p>
-                        <div class="bg-slate-100 p-6 rounded-lg text-left">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="text-slate-500">Bankgiro</span>
-                                <span class="font-mono font-bold text-lg text-[#00386B]">555-1234</span>
-                            </div>
-                             <div class="flex justify-between items-center mb-2">
-                                <span class="text-slate-500">Mottagare</span>
-                                <span class="font-semibold text-slate-700">Stiftelsen Sv. Rullstolsinnebandy</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500">Meddelande</span>
-                                <span class="font-semibold text-slate-700">Gåva + Ditt Namn</span>
+                        <!-- Bankgiro -->
+                        <div class="reveal bg-white rounded-xl shadow-xl p-8 md:p-10 w-full max-w-md border-b-8 border-[#00386B]">
+                            <h3 class="text-3xl font-bold text-[#00386B] mb-4">BANKÖVERFÖRING</h3>
+                            <p class="text-slate-600 mb-6">För dig som föredrar en klassisk banköverföring.</p>
+                            <div class="bg-slate-100 p-6 rounded-lg text-left">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-slate-500">Bankgiro</span>
+                                    <span class="font-mono font-bold text-lg text-[#00386B]">555-1234</span>
+                                </div>
+                                 <div class="flex justify-between items-center mb-2">
+                                    <span class="text-slate-500">Mottagare</span>
+                                    <span class="font-semibold text-slate-700">Stiftelsen Sv. Rullstolsinnebandy</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500">Meddelande</span>
+                                    <span class="font-semibold text-slate-700">Gåva + Ditt Namn</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -279,42 +502,64 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Hide mobile menu on link click
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
             });
-        });
+            
+            // Hide mobile menu on link click
+            document.querySelectorAll('#mobile-menu a, #header a[href^="#"]').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
 
-        // Scroll animations
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
+            // Scroll animations
+            function reveal() {
+                var reveals = document.querySelectorAll(".reveal");
 
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
+                for (var i = 0; i < reveals.length; i++) {
+                    var windowHeight = window.innerHeight;
+                    var elementTop = reveals[i].getBoundingClientRect().top;
+                    var elementVisible = 150;
 
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                } else {
-                    // Optional: remove active class to re-trigger animation on scroll up
-                    // reveals[i].classList.remove("active"); 
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveals[i].classList.add("active");
+                    }
                 }
             }
-        }
 
-        window.addEventListener("scroll", reveal);
-        // Trigger on load
-        reveal();
+            window.addEventListener("scroll", reveal);
+            reveal(); // Trigger on load
+
+            // YouTube Carousel Logic
+            const slidesContainer = document.getElementById('youtube-slides');
+            const prevButton = document.getElementById('youtube-prev');
+            const nextButton = document.getElementById('youtube-next');
+            if(slidesContainer){
+                const slides = slidesContainer.children;
+                const slideCount = slides.length;
+                let currentIndex = 0;
+
+                function updateCarousel() {
+                    slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
+
+                nextButton.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % slideCount;
+                    updateCarousel();
+                });
+
+                prevButton.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                    updateCarousel();
+                });
+            }
+        });
     </script>
 </body>
 </html>
