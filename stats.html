@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="sv" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistik & Räckvidd – Svenska Rullstolsinnebandyligan</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js för grafer -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+
+        /* Definition av huvudfärger */
+        :root {
+            --color-primary: #00386B; /* Mörkblå */
+            --color-secondary: #FFCD00; /* Gyllengul */
+            --color-accent: #006aa7; /* Ljusblå */
+            --color-text: #1e293b; /* slate-800 */
+        }
+
+        /* Sektionstitel med gul understrykning (från orginaldesignen) */
+        .section-title {
+            color: var(--color-primary);
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--color-secondary);
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Anpassad styling för stat-kort */
+        .stat-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            border-bottom: 4px solid var(--color-secondary);
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .stat-card h3 {
+            color: var(--color-primary);
+        }
+        .stat-card .stat-number {
+            color: var(--color-text);
+        }
+
+        /* Behållare för diagram för att säkerställa responsivitet och storlek */
+        .chart-container {
+            position: relative;
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+            padding: 1.5rem;
+            min-height: 400px; /* Säkerställer höjd innan JS laddas */
+            max-height: 450px;
+        }
+
+        /* Anpassade färger för Tailwind */
+        .bg-primary { background-color: var(--color-primary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .text-primary { color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); }
+        .border-secondary { border-color: var(--color-secondary); }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Header -->
+    <header class="bg-primary text-white shadow-lg">
+        <div class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 text-lg font-bold">
+                <!-- Svenska flaggan SVG -->
+                <svg class="w-8 h-8 rounded-sm flex-shrink-0" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="16" height="10" fill="#006aa7"/>
+                    <rect x="5" width="2" height="10" fill="#fecc00"/>
+                    <rect y="4" width="16" height="2" fill="#fecc00"/>
+                </svg>
+                <span class="text-xl">
+                    <span class="hidden sm:inline">Statistik & Räckvidd</span>
+                    <span class="sm:hidden">Statistik</span>
+                    <span class="block text-xs font-normal opacity-80">Svenska Rullstolsinnebandyligan</span>
+                </span>
+            </a>
+            <a href="#" class="bg-secondary text-primary font-bold py-2 px-5 rounded-full hover:bg-yellow-400 transition-transform duration-300 hover:scale-105 shadow-sm text-sm">
+                Kontakta Oss
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Sektion -->
+        <section class="bg-white pt-16 pb-20">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="relative text-4xl md:text-5xl font-black tracking-tight mb-16 section-title">
+                    Mätbar Räckvidd, Verklig Effekt
+                </h1>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed">
+                    Välkommen till vår statistiköversikt från Innebandy Play. Siffrorna nedan visar inte bara tittare; de representerar en engagerad och växande målgrupp. För våra sponsorer är detta en unik möjlighet att nå ut, bygga varumärke och associeras med elitidrott, inkludering och en ostoppbar kämparanda.
+                </p>
+            </div>
+        </section>
+
+        <!-- KPI / Huvud-statistik Sektion -->
+        <section class="py-20 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-extrabold text-center text-primary mb-12">Nyckeltal från Senaste Omgången</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Stat 1: Sammanlagt Tittare -->
+                    <div class="stat-card">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-secondary mb-4">
+                            <svg class="w-6 h-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.003c0 1.113.285 2.16.786 3.07m0-3.07H14.25m-2.625 6.178a9.337 9.337 0 01-4.121-.952 4.125 4.125 0 01-7.533-2.493m7.533 2.493v.003c0 1.113-.285 2.16-.786 3.07m7.533 2.493v-.003c0-1.113.285-2.16.786-3.07m0 0H14.25m-2.625-6.178a9.337 9.337 0 01-4.121.952 4.125 4.125 0 01-7.533 2.493m7.533-2.493v-.003c0-1.113.285-2.16.786-3.07m-7.533-2.493v.003c0 1.113-.285 2.16-.786 3.07m0 0h7.5" /></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold uppercase text-slate-500 tracking-wider">Totalt Tittare</h3>
+                        <p class="stat-number text-5xl font-extrabold mt-1">195</p>
+                        <p class="text-slate-500 mt-2">Under senaste sändningsdagen.</p>
+                    </div>
+                    
+                    <!-- Stat 2: Tittartopp -->
+                    <div class="stat-card">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-secondary mb-4">
+                            <svg class="w-6 h-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold uppercase text-slate-500 tracking-wider">Högsta Tittartopp</h3>
+                        <p class="stat-number text-5xl font-extrabold mt-1">67</p>
+                        <p class="text-slate-500 mt-2">Under matchen Eskilstuna - Göteborg.</p>
+                    </div>
+
+                    <!-- Stat 3: Jämförelse -->
+                    <div class="stat-card">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-secondary mb-4">
+                            <svg class="w-6 h-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold uppercase text-slate-500 tracking-wider">Jämförelse</h3>
+                        <p class="stat-number text-4xl font-extrabold mt-1">I nivå med Allsvenskan</p>
+                        <p class="text-slate-500 mt-2">Våra toppsiffror matchar sändningar i Allsvenskan.</p>
+                    </div>
+
+                    <!-- Stat 4: Tillväxt (Mockad data) -->
+                    <div class="stat-card">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-secondary mb-4">
+                            <svg class="w-6 h-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.75A.75.75 0 013 4.5h.75m0 0H21m-12 12.75h.008v.008H9v-.008z" /></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold uppercase text-slate-500 tracking-wider">Tittar-engagemang</h3>
+                        <p class="stat-number text-5xl font-extrabold mt-1">Hög</p>
+                        <p class="text-slate-500 mt-2">Engagerad publik som ser stora delar av matcherna.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diagram / Grafer Sektion -->
+        <section class="py-20 md:py-24 bg-slate-100">
+            <div class="container mx-auto px-6">
+                <h2 class="relative text-3xl md:text-4xl font-black text-center mb-16 section-title">
+                    Visuell Datalägesbild
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- Graf 1: Tittartoppar per Match -->
+                    <div class="chart-container">
+                        <h3 class="text-xl font-bold text-primary mb-4 text-center">Tittartoppar per Match</h3>
+                        <canvas id="matchViewersChart" role="img" aria-label="Stapeldiagram som visar tittartoppar per match"></canvas>
+                    </div>
+
+                    <!-- Graf 2: Tittarutveckling (Linjediagram) -->
+                    <div class="chart-container">
+                        <h3 class="text-xl font-bold text-primary mb-4 text-center">Tittarutveckling (Mockad data)</h3>
+                        <canvas id="growthChart" role="img" aria-label="Linjediagram som visar tittarutveckling över säsongen"></canvas>
+                    </div>
+                    
+                    <!-- Graf 3: Geografisk Spridning -->
+                    <div class="chart-container">
+                        <h3 class="text-xl font-bold text-primary mb-4 text-center">Geografisk Spridning (Mockad data)</h3>
+                        <canvas id="geoChart" role="img" aria-label="Ringdiagram som visar geografisk spridning av tittare"></canvas>
+                    </div>
+
+                    <!-- Graf 4: Enhetsfördelning -->
+                    <div class="chart-container">
+                        <h3 class="text-xl font-bold text-primary mb-4 text-center">Enhetsfördelning (Mockad data)</h3>
+                        <canvas id="deviceChart" role="img" aria-label="Ringdiagram som visar fördelning mellan mobil och desktop"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Varför Sponsra? Sektion -->
+        <section class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <!-- BILD: Byt ut mot en relevant bild, t.ex. från en sändning -->
+                        <img src="https://placehold.co/800x600/00386B/FFCD00?text=Exponering+p%C3%A5+Innebandy+Play" alt="Exempel på exponering under en match" class="rounded-lg shadow-xl">
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-primary mb-6">Värdet för Er som Sponsor</h2>
+                        <p class="text-slate-600 text-lg leading-relaxed mb-6">
+                            Siffrorna talar sitt tydliga språk. Att sponsra Svenska Rullstolsinnebandyligan är en direktinvestering i en växande sport med en passionerad publik.
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-secondary text-primary font-bold mr-3 mt-1">✔</span>
+                                <span class="text-slate-700"><strong class="text-primary">Direkt Exponering:</strong> Nå ut till tusentals tittare över hela Sverige via livesändningar, repriser och sociala medier.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-secondary text-primary font-bold mr-3 mt-1">✔</span>
+                                <span class="text-slate-700"><strong class="text-primary">Starkt Varumärkesbyggande:</strong> Associera ert varumärke med positiva värden som inkludering, elitprestation och gemenskap.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-secondary text-primary font-bold mr-3 mt-1">✔</span>
+                                <span class="text-slate-700"><strong class="text-primary">Mätbar Räckvidd:</strong> Till skillnad från traditionell sponsring ger digitala sändningar er konkret och mätbar data på er investering.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Sektion -->
+        <section class="bg-primary text-white">
+            <div class="container mx-auto px-6 py-20 text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-secondary mb-4">Bli en Del av Vår Resa</h2>
+                <p class="max-w-2xl mx-auto text-lg text-slate-200 mb-8">
+                    Vi har siffrorna, passionen och plattformen. Tillsammans kan vi skapa oslagbar exponering och stötta en sport i världsklass. Låt oss diskutera hur vi kan samarbeta.
+                </p>
+                <a href="mailto:exempel@rullstolsinnebandy.se" class="bg-secondary text-primary font-bold text-lg py-4 px-10 rounded-full hover:bg-yellow-400 transition-transform duration-300 hover:scale-105 shadow-lg">
+                    Kontakta Sponsorgruppen
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400">
+        <div class="container mx-auto px-6 py-8 text-center text-sm">
+            &copy; 2025 Svenska Rullstolsinnebandyligan. All data från Innebandy Play.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Globala inställningar för Chart.js
+            Chart.defaults.font.family = 'Inter, sans-serif';
+            Chart.defaults.font.weight = '500';
+            Chart.defaults.color = '#334155'; // slate-700
+            Chart.defaults.plugins.legend.position = 'bottom';
+            Chart.defaults.plugins.tooltip.backgroundColor = '#00386B';
+            Chart.defaults.plugins.tooltip.titleFont.weight = 'bold';
+            Chart.defaults.plugins.tooltip.padding = 12;
+            Chart.defaults.plugins.tooltip.cornerRadius = 6;
+
+            // Färger från CSS-variabler
+            const primaryColor = '#00386B';
+            const secondaryColor = '#FFCD00';
+            const accentColor = '#006aa7';
+            const accentColorLight = '#FDE68A'; // Ljusgul
+            const grayColor = '#94a3b8'; // slate-400
+            const lightGrayColor = '#d1d5db'; // slate-300 (Ny färg)
+
+
+            // 1. Tittartoppar per Match (Stapeldiagram)
+            const ctxMatch = document.getElementById('matchViewersChart');
+            if (ctxMatch) {
+                new Chart(ctxMatch, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Eskilstuna - Göteborg', 'Nacka - Eskilstuna', 'Kalmar - Stockholm', 'Umeå - Nacka'],
+                        datasets: [{
+                            label: 'Tittartopp',
+                            data: [67, 60, 52, 45], // Inkluderar din data + mockad data
+                            backgroundColor: [
+                                secondaryColor, // Högsta stapeln
+                                accentColor,
+                                accentColor,
+                                accentColor
+                            ],
+                            borderColor: [
+                                '#EAB308', // Mörkare gul
+                                primaryColor,
+                                primaryColor,
+                                primaryColor
+                            ],
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` ${context.parsed.y} tittare`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Antal Tittare'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 2. Tittarutveckling (Linjediagram)
+            const ctxGrowth = document.getElementById('growthChart');
+            if(ctxGrowth) {
+                new Chart(ctxGrowth, {
+                    type: 'line',
+                    data: {
+                        labels: ['Omgång 1', 'Omgång 2', 'Omgång 3', 'Omgång 4 (Senaste)'],
+                        datasets: [{
+                            label: 'Sammanlagt antal tittare',
+                            data: [120, 150, 145, 195], // Mockad tillväxtdata, slutar på din siffra
+                            fill: true,
+                            borderColor: primaryColor,
+                            backgroundColor: 'rgba(0, 56, 107, 0.1)',
+                            tension: 0.1, // Lätt böjda linjer
+                            pointRadius: 5,
+                            pointBackgroundColor: primaryColor,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                         scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: 'Antal Tittare'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 3. Geografisk Spridning (Ringdiagram)
+            const ctxGeo = document.getElementById('geoChart');
+            if (ctxGeo) {
+                new Chart(ctxGeo, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Stockholmsregionen', 'Västra Götaland', 'Mälardalen', 'Skåne', 'Övriga Sverige', 'Övriga Världen'],
+                        datasets: [{
+                            label: 'Geografisk Spridning',
+                            data: [30, 25, 18, 12, 10, 5], // Ny mockad data
+                            backgroundColor: [
+                                primaryColor,
+                                secondaryColor,
+                                accentColor,
+                                accentColorLight,
+                                grayColor,
+                                lightGrayColor // Ny färg
+                            ],
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right', // Flyttar legenden till höger för att undvika att text skärs av
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` ${context.label}: ${context.parsed}%`;
+                                    },
+                                    afterLabel: function(context) {
+                                        // Lägger till extra info för "Övriga Världen"
+                                        if (context.label === 'Övriga Världen') {
+                                            return ' (Främst Holland, Tjeckien, USA, Kanada)';
+                                        }
+                                        return null;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 4. Enhetsfördelning (Ringdiagram)
+            const ctxDevice = document.getElementById('deviceChart');
+            if (ctxDevice) {
+                new Chart(ctxDevice, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Mobil', 'Desktop', 'Surfplatta'],
+                        datasets: [{
+                            label: 'Enhet',
+                            data: [65, 30, 5], // Mockad data
+                            backgroundColor: [
+                                primaryColor,
+                                secondaryColor,
+                                accentColor
+                            ],
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` ${context.label}: ${context.parsed}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
+
+
